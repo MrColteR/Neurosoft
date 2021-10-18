@@ -1,0 +1,55 @@
+﻿<Window x:Class="Neurosoft.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Neurosoft"
+        xmlns:col="clr-namespace:System.Collections;assembly=mscorlib"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <ToolBar VerticalAlignment="Top" Height="40" Background="White" ToolBarTray.IsLocked="True">
+            <Button x:Name="btnAdd" Command="{Binding AddCommand}">
+                <Image Source="/Image/btnAdd.png" MaxHeight="32"/>
+            </Button>
+            <Button x:Name="btnUp">
+                <Image Source="/Image/btnUp.png" MaxHeight="32"/>
+            </Button>
+            <Button x:Name="btnDown">
+                <Image Source="/Image/btnDown.png" MaxHeight="32"/>
+            </Button>
+            <Separator></Separator>
+            <Button x:Name="btnDelete" Command="{Binding RemoveCommand}" CommandParameter="{Binding SelectedDataList}">
+                <Image Source="/Image/btnDelete.png" MaxHeight="32"/>
+            </Button>
+        </ToolBar>
+        
+        <DataGrid x:Name="dgList" FontSize="16" Margin="0,40,0,30" ItemsSource="{Binding DataList}" SelectedItem="{Binding SelectedDataList}"
+                  AutoGenerateColumns="False" CanUserAddRows="False" Background="White" GridLinesVisibility="None" RowBackground="LightGray"
+                  AlternatingRowBackground="White">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Название" Width="50*" Binding="{Binding Path = Title}"/>
+                <DataGridComboBoxColumn Header="Тип" Width="40*" IsReadOnly="False" 
+                                        SelectedItemBinding="{Binding Path = Type}">
+                    <DataGridComboBoxColumn.ItemsSource>
+                        <col:ArrayList>
+                            <sys:String>Простая строка</sys:String>
+                            <sys:String>Строка с историей</sys:String>
+                            <sys:String>Значение из списка</sys:String>
+                            <sys:String>Набор значений из списка</sys:String>
+                        </col:ArrayList>
+                    </DataGridComboBoxColumn.ItemsSource>
+                </DataGridComboBoxColumn>
+                <DataGridHyperlinkColumn Width="10*" IsReadOnly="False" Binding="{Binding Path = AdditionalList}">
+                    <DataGridHyperlinkColumn.ElementStyle>
+                        <Style>
+                            <EventSetter Event="Hyperlink.Click" Handler="{Binding Path =  }"/>
+                        </Style>
+                    </DataGridHyperlinkColumn.ElementStyle>
+                </DataGridHyperlinkColumn>
+                
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Window>
