@@ -13,7 +13,7 @@
             <Button x:Name="btnAdd" Command="{Binding AddCommand}">
                 <Image Source="/Image/btnAdd.png" MaxHeight="32"/>
             </Button>
-            <Button x:Name="btnUp">
+            <Button x:Name="btnUp" Command="{Binding OpenSecondWindow}">
                 <Image Source="/Image/btnUp.png" MaxHeight="32"/>
             </Button>
             <Button x:Name="btnDown">
@@ -41,14 +41,20 @@
                         </col:ArrayList>
                     </DataGridComboBoxColumn.ItemsSource>
                 </DataGridComboBoxColumn>
-                <DataGridHyperlinkColumn Width="10*" IsReadOnly="False" Binding="{Binding Path = AdditionalList}">
+                <!--<DataGridHyperlinkColumn Width="10*" IsReadOnly="False" Binding="{Binding Path = AdditionalList}">
                     <DataGridHyperlinkColumn.ElementStyle>
                         <Style>
                             <EventSetter Event="Hyperlink.Click" Handler="{Binding Path =  }"/>
                         </Style>
                     </DataGridHyperlinkColumn.ElementStyle>
-                </DataGridHyperlinkColumn>
-                
+                </DataGridHyperlinkColumn>-->
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Command="{Binding OpenSecondWindow}" Content="{Binding AdditionalList}" Background="White"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

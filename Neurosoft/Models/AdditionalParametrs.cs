@@ -50,7 +50,7 @@ namespace Neurosoft.Models
         //        };
         //    }
         //}
-        public RelayCommand OpenSecondWindow // Работает для кнопок
+        public RelayCommand OpenSecondWindow // Работает для command
         {
             get
             {
@@ -77,10 +77,10 @@ namespace Neurosoft.Models
         {
             DataList = new ObservableCollection<MainWindowViewModel>
             {
-                new MainWindowViewModel { AdditionalList = "1", Title = "1" },
-                new MainWindowViewModel { AdditionalList = "2", Title = "2" },
-                new MainWindowViewModel { AdditionalList = "3", Title = "3" },
-                new MainWindowViewModel { AdditionalList = "4", Title = "4" },
+                new MainWindowViewModel { AdditionalList = "1", Title = "1", Type = "1" },
+                new MainWindowViewModel { AdditionalList = "2", Title = "2", Type = "1" },
+                new MainWindowViewModel { AdditionalList = "3", Title = "3", Type = "1" },
+                new MainWindowViewModel { AdditionalList = "4", Title = "4", Type = "1" },
             };
         }
     }

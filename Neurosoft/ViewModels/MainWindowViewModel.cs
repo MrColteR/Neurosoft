@@ -31,7 +31,7 @@ namespace Neurosoft.ViewModels
             set
             {
                 additionalList = value;
-                OnPropertyChanged("AdditionaList");
+                OnPropertyChanged("AdditionalList");
             }
         }
     }
