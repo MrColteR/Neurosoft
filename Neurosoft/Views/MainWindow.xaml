@@ -57,5 +57,6 @@
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
+        <Button x:Name="btnSave" Content="Button" HorizontalAlignment="Right" Margin="0,389,0,5" Width="75" Command="{Binding Path = SaveData}"/>
     </Grid>
 </Window>

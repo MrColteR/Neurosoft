@@ -1,8 +1,12 @@
-﻿using Neurosoft.Models.Base;
+﻿using System;
+using System.IO;
+using Neurosoft.Models.Base;
 using Neurosoft.ViewModels;
 using Neurosoft.Command;
 using System.Collections.ObjectModel;
 using Neurosoft.Views;
+using Newtonsoft.Json;
+using System.Windows;
 
 namespace Neurosoft.Models
 {
@@ -13,6 +17,7 @@ namespace Neurosoft.Models
         private RelayCommand removeCommand;
         //private RelayCommand moveUpCommand;
         private RelayCommand openSecondWindow;
+        private RelayCommand saveDataCommand;
         public RelayCommand AddCommand
         {
             get
@@ -61,7 +66,42 @@ namespace Neurosoft.Models
                 }));
             }
         }
+        public RelayCommand SaveDataCommand
+        {
+            get
+            {
+                return saveDataCommand ?? (saveDataCommand = new RelayCommand(obj =>
+                {
+                    SaveJson(DataList);
+                    MessageBox.Show("Сохранил");
+                }));
+            }
+        }
         #endregion
+
+        private readonly string fileName = $"{Environment.CurrentDirectory}\\List.json";
+        private ObservableCollection<MainWindowViewModel> ReadJson()
+        {
+            if (!File.Exists(fileName))
+            {
+                File.CreateText(fileName).Dispose();
+                return new ObservableCollection<MainWindowViewModel>();
+            }
+            using (StreamReader reader = File.OpenText(fileName))
+            {
+                var file = reader.ReadToEnd();
+                return JsonConvert.DeserializeObject<ObservableCollection<MainWindowViewModel>>(file);
+            }
+        }
+        private void SaveJson(object data)
+        {
+            using (StreamWriter sw = File.CreateText(fileName))
+            {
+                string file = JsonConvert.SerializeObject(data);
+                sw.Write(file);
+            }
+        }
+
         private MainWindowViewModel selectedDataList;
         public MainWindowViewModel SelectedDataList
         {
@@ -75,6 +115,7 @@ namespace Neurosoft.Models
         public ObservableCollection<MainWindowViewModel> DataList { get; set; }
         public AdditionalParametrs()
         {
+            //DataList = ReadJson();
             DataList = new ObservableCollection<MainWindowViewModel>
             {
                 new MainWindowViewModel { AdditionalList = "1", Title = "1", Type = "1" },
