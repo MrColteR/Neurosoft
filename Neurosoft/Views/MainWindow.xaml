@@ -13,7 +13,7 @@
             <Button x:Name="btnAdd" Command="{Binding AddCommand}">
                 <Image Source="/Image/btnAdd.png" MaxHeight="32"/>
             </Button>
-            <Button x:Name="btnUp" Command="{Binding OpenSecondWindow}">
+            <Button x:Name="btnUp" Command="{Binding OpenSecondWindowCommand}">
                 <Image Source="/Image/btnUp.png" MaxHeight="32"/>
             </Button>
             <Button x:Name="btnDown">
@@ -57,6 +57,6 @@
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
-        <Button x:Name="btnSave" Content="Button" HorizontalAlignment="Right" Margin="0,389,0,5" Width="75" Command="{Binding Path = SaveData}"/>
+        <Button x:Name="btnSave" Content="Button" HorizontalAlignment="Right" Margin="0,389,0,5" Width="75" Command="{Binding SaveCommand}"/>
     </Grid>
 </Window>

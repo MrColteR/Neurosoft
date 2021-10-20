@@ -3,7 +3,7 @@ using System.Runtime.CompilerServices;
 
 namespace Neurosoft.Models.Base
 {
-    class Model
+    public class Model
     {
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnPropertyChanged([CallerMemberName] string prop = "")

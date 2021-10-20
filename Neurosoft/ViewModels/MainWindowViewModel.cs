@@ -1,38 +1,100 @@
-﻿using Neurosoft.ViewModels.Base;
+﻿using System;
+using System.IO;
+using Neurosoft.Command;
+using Neurosoft.ViewModels.Base;
+using System.Collections.ObjectModel;
+using Neurosoft.Models;
+using Neurosoft.Data.Base;
 
 namespace Neurosoft.ViewModels
 {
-    class MainWindowViewModel : ViewModel
+    public class MainWindowViewModel : ViewModel
     {
-        private string title;
-        private string type;
-        private string additionalList;
-        public string Title
+        private readonly string fileName = $"{Environment.CurrentDirectory}\\List.json";
+        IFileService fileService;
+
+        #region Команды
+        private RelayCommand addCommand;
+        private RelayCommand removeCommand;
+        //private RelayCommand moveUpCommand;
+        private RelayCommand openSecondWindow;
+        private RelayCommand saveCommand;
+        public RelayCommand AddCommand
         {
-            get { return title; }
-            set
+            get
             {
-                title = value;
-                OnPropertyChanged("Title");
+                return addCommand ?? (addCommand = new RelayCommand(obj =>
+                {
+                    AdditionalParametrs additionalParametrs = new AdditionalParametrs();
+                    DataList.Insert(0, additionalParametrs);
+                    SelectedDataList = additionalParametrs;
+                }));
             }
         }
-        public string Type
+        public RelayCommand RemoveCommand
         {
-            get { return type; }
-            set
+            get
             {
-                type = value;
-                OnPropertyChanged("Type");
+                return removeCommand ?? (removeCommand = new RelayCommand(obj =>
+                {
+                    AdditionalParametrs additionalParametrs = obj as AdditionalParametrs;
+                    if (additionalParametrs != null)
+                    {
+                        DataList.Remove(additionalParametrs);
+                    }
+                },
+                    (obj) => DataList.Count > 0));
             }
         }
-        public string AdditionalList
+        //public RelayCommand MoveUpCommand
+        //{
+        //    get
+        //    {
+        //        return moveUpCommand ?? (moveUpCommand = new RelayCommand(obj =>
+        //        {
+        //            MainWindowViewModel mainWindowViewModel =
+        //        };
+        //    }
+        //}
+        public RelayCommand OpenSecondWindowCommand // Работает для command
         {
-            get { return additionalList; }
+            get
+            {
+                return openSecondWindow ?? (openSecondWindow = new RelayCommand(obj =>
+                {
+                    //ListWindow listWindow = new ListWindow();
+                    //listWindow.Show();
+                }));
+            }
+        }
+        public RelayCommand SaveCommand
+        {
+            get
+            {
+                return saveCommand ??
+                  (saveCommand = new RelayCommand(obj =>
+                  {
+                      fileService.Save(fileName, DataList);
+                  }));
+            }
+        }
+        #endregion
+
+        private AdditionalParametrs selectedDataList;
+        public AdditionalParametrs SelectedDataList
+        {
+            get { return selectedDataList; }
             set
             {
-                additionalList = value;
-                OnPropertyChanged("AdditionalList");
+                selectedDataList = value;
+                OnPropertyChanged("SelectedDataList");
             }
+        }
+        public ObservableCollection<AdditionalParametrs> DataList { get; set; }
+        public MainWindowViewModel(IFileService fileService)
+        {
+            this.fileService = fileService;
+            DataList = fileService.Open(fileName);
         }
     }
 }

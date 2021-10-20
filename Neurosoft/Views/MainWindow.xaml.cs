@@ -1,4 +1,5 @@
-﻿using Neurosoft.Models;
+﻿using Neurosoft.Data.Base;
+using Neurosoft.ViewModels;
 using System.Windows;
 
 namespace Neurosoft
@@ -11,7 +12,7 @@ namespace Neurosoft
         public MainWindow()
         {
             InitializeComponent();
-            DataContext = new AdditionalParametrs();
+            DataContext = new MainWindowViewModel(new JsonFileService());
         }
     }
 }
