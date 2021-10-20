@@ -5,6 +5,7 @@ using Neurosoft.ViewModels.Base;
 using System.Collections.ObjectModel;
 using Neurosoft.Models;
 using Neurosoft.Data.Base;
+using Neurosoft.Views;
 
 namespace Neurosoft.ViewModels
 {
@@ -19,6 +20,7 @@ namespace Neurosoft.ViewModels
         //private RelayCommand moveUpCommand;
         private RelayCommand openSecondWindow;
         private RelayCommand saveCommand;
+        private RelayCommand closeWindowCommand;
         public RelayCommand AddCommand
         {
             get
@@ -56,14 +58,18 @@ namespace Neurosoft.ViewModels
         //        };
         //    }
         //}
-        public RelayCommand OpenSecondWindowCommand // Работает для command
+        public RelayCommand OpenSecondWindowCommand
         {
             get
             {
                 return openSecondWindow ?? (openSecondWindow = new RelayCommand(obj =>
                 {
-                    //ListWindow listWindow = new ListWindow();
-                    //listWindow.Show();
+                    AdditionalParametrs additionalParametrs = obj as AdditionalParametrs;
+                    if (additionalParametrs.Type == "Значение из списка" || additionalParametrs.Type == "Набор значений из списка")
+                    {
+                        ListWindow listWindow = new ListWindow();
+                        listWindow.Show();
+                    }
                 }));
             }
         }
@@ -78,9 +84,22 @@ namespace Neurosoft.ViewModels
                   }));
             }
         }
-        #endregion
+        public RelayCommand CloseWindowCommand
+        {
+            get
+            {
+                return closeWindowCommand ?? (closeWindowCommand = new RelayCommand(obj =>
+                    {
+                        MainWindow mv = obj as MainWindow;
+                        mv.Close();
+                    }));
+            }
+        }   /*o => ((MainWindow)o).Close())*/ // Спросить у Димы
+        
 
-        private AdditionalParametrs selectedDataList;
+    #endregion
+
+    private AdditionalParametrs selectedDataList;
         public AdditionalParametrs SelectedDataList
         {
             get { return selectedDataList; }

@@ -1,4 +1,5 @@
 ﻿using Neurosoft.Models.Base;
+using System.Collections.Generic;
 
 namespace Neurosoft.Models
 {
@@ -7,13 +8,14 @@ namespace Neurosoft.Models
         private string title;
         private string type;
         private string additionalList;
+        private List<string> additionalListArr;
         public string Title
         {
             get { return title; }
             set
             {
                 title = value;
-                OnPropertyChanged("Title");
+                //OnPropertyChanged(nameof(Title)); // не надо
             }
         }
         public string Type
@@ -22,17 +24,22 @@ namespace Neurosoft.Models
             set
             {
                 type = value;
-                OnPropertyChanged("Type");
+                //OnPropertyChanged(nameof(Type));
             }
         }
         public string AdditionalList
         {
-            get { return additionalList = "Список"; }
+            get { return additionalList = "Список..."; }
             set
             {
                 additionalList = value;
-                OnPropertyChanged("AdditionalList");
+                //OnPropertyChanged(nameof(AdditionalList));
             }
+        }
+        public List<string> AdditionalListArr
+        {
+            get { return additionalListArr; }
+            set { additionalListArr = value; }
         }
     }
 }
