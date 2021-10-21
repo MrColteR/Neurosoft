@@ -17,7 +17,8 @@ namespace Neurosoft.ViewModels
         #region Команды
         private RelayCommand addCommand;
         private RelayCommand removeCommand;
-        //private RelayCommand moveUpCommand;
+        private RelayCommand moveUpCommand;
+        private RelayCommand moveDownCommand;
         private RelayCommand openSecondWindow;
         private RelayCommand saveCommand;
         private RelayCommand closeWindowCommand;
@@ -48,16 +49,42 @@ namespace Neurosoft.ViewModels
                 },(obj) => DataList.Count > 0));
             }
         }
-        //public RelayCommand MoveUpCommand
-        //{
-        //    get
-        //    {
-        //        return moveUpCommand ?? (moveUpCommand = new RelayCommand(obj =>
-        //        {
-        //            MainWindowViewModel mainWindowViewModel =
-        //        };
-        //    }
-        //}
+        public RelayCommand MoveUpCommand
+        {
+            get
+            {
+                return moveUpCommand ?? (moveUpCommand = new RelayCommand(obj =>
+                {
+                    var item = obj as AdditionalParametrs;
+                    var index = DataList.IndexOf(item);
+                    if (index != 0)
+                    {
+                        var temp = DataList[index - 1];
+                        DataList[index - 1] = DataList[index];
+                        DataList[index] = temp;
+                        SelectedIndex = index - 1;
+                    }
+                }));
+            }
+        }
+        public RelayCommand MoveDownCommand
+        {
+            get
+            {
+                return moveDownCommand ?? (moveDownCommand = new RelayCommand(obj =>
+                {
+                    var item = obj as AdditionalParametrs;
+                    var index = DataList.IndexOf(item);
+                    if (index != DataList.Count - 1)
+                    {
+                        var temp = DataList[index + 1];
+                        DataList[index + 1] = DataList[index];
+                        DataList[index] = temp;
+                        SelectedIndex = index + 1;
+                    }
+                }));
+            }
+        }
         public RelayCommand OpenSecondWindowCommand
         {
             get
@@ -106,6 +133,16 @@ namespace Neurosoft.ViewModels
             {
                 selectedDataList = value;
                 OnPropertyChanged(nameof(SelectedDataList));
+            }
+        }
+        private int selectedIndex;
+        public int SelectedIndex
+        {
+            get { return selectedIndex; }
+            set
+            {
+                selectedIndex = value;
+                OnPropertyChanged(nameof(SelectedIndex));
             }
         }
         public ObservableCollection<AdditionalParametrs> DataList { get; set; }

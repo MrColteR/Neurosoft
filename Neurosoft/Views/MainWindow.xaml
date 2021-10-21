@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:Neurosoft"
         xmlns:col="clr-namespace:System.Collections;assembly=mscorlib"
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
+        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
         Title="MainWindow" Height="450" Width="800">
@@ -18,14 +19,19 @@
                     Command="{Binding AddCommand}">
                 <Image Source="/Image/btnAdd.png" MaxHeight="32"/>
             </Button>
-            <Button x:Name="btnUp">
+            <Button x:Name="btnUp"
+                    Command="{Binding MoveUpCommand}"
+                    CommandParameter="{Binding SelectedDataList}">
                 <Image Source="/Image/btnUp.png" MaxHeight="32"/>
             </Button>
-            <Button x:Name="btnDown">
+            <Button x:Name="btnDown"
+                    Command="{Binding MoveDownCommand}"
+                    CommandParameter="{Binding SelectedDataList}">
                 <Image Source="/Image/btnDown.png" MaxHeight="32"/>
             </Button>
             <Separator></Separator>
-            <Button x:Name="btnDelete" Command="{Binding RemoveCommand}"
+            <Button x:Name="btnDelete" 
+                    Command="{Binding RemoveCommand}"
                     CommandParameter="{Binding SelectedDataList}">
                 <Image Source="/Image/btnDelete.png" MaxHeight="32"/>
             </Button>
@@ -35,6 +41,7 @@
                   FontSize="16" Margin="0,40,0,30"
                   ItemsSource="{Binding DataList}"
                   SelectedItem="{Binding SelectedDataList}"
+                  SelectedIndex="{Binding SelectedIndex}"
                   AutoGenerateColumns="False"
                   CanUserAddRows="False"
                   Background="White"

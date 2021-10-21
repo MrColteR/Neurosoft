@@ -33,7 +33,8 @@
                   Background="White"
                   GridLinesVisibility="None"
                   ItemsSource="{Binding DataList}"
-                  SelectedItem="{Binding SelectedDataList}">
+                  SelectedItem="{Binding SelectedDataList}"
+                  SelectedIndex="{Binding SelectedIndex}">
             <DataGrid.Columns>
                 <DataGridTextColumn Width="*"
                                     IsReadOnly="False" 
@@ -41,6 +42,8 @@
             </DataGrid.Columns>
         </DataGrid>
         <Button x:Name="btnUp"
+                Command="{Binding MoveUpCommand}"
+                CommandParameter="{Binding SelectedDataList}"
                 Content="Вверх" 
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
@@ -51,6 +54,8 @@
                 FontSize="14"
                 Height="23"/>
         <Button x:Name="btnDown"
+                Command="{Binding MoveDownCommand}"
+                CommandParameter="{Binding SelectedDataList}"
                 Content="Вниз"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"

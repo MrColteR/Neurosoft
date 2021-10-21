@@ -16,7 +16,6 @@ namespace Neurosoft.Models
             set
             {
                 id = value;
-                //OnPropertyChanged(nameof(Title)); // не надо
             }
         }
         public string Title
@@ -25,7 +24,6 @@ namespace Neurosoft.Models
             set
             {
                 title = value;
-                //OnPropertyChanged(nameof(Title)); // не надо
             }
         }
         public string Type
@@ -34,7 +32,6 @@ namespace Neurosoft.Models
             set
             {
                 type = value;
-                //OnPropertyChanged(nameof(Type));
             }
         }
         public string AdditionalList
@@ -43,7 +40,6 @@ namespace Neurosoft.Models
             set
             {
                 additionalList = value;
-                //OnPropertyChanged(nameof(AdditionalList));
             }
         }
         public List<string> AdditionalListArr
