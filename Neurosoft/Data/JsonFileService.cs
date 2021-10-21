@@ -1,5 +1,6 @@
 ﻿using Neurosoft.Data.Base;
 using Neurosoft.Models;
+using Newtonsoft.Json;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Runtime.Serialization.Json;
@@ -10,15 +11,14 @@ namespace Neurosoft
     {
         public ObservableCollection<AdditionalParametrs> Open(string filename)
         {
-            ObservableCollection<AdditionalParametrs> phones = new ObservableCollection<AdditionalParametrs>();
+            ObservableCollection<AdditionalParametrs> items = new ObservableCollection<AdditionalParametrs>() { };
             DataContractJsonSerializer jsonFormatter = new DataContractJsonSerializer(typeof(ObservableCollection<AdditionalParametrs>));
             using (FileStream fs = new FileStream(filename, FileMode.OpenOrCreate))
             {
-                phones = jsonFormatter.ReadObject(fs) as ObservableCollection<AdditionalParametrs>;
+                items = jsonFormatter.ReadObject(fs) as ObservableCollection<AdditionalParametrs>;
             }
-            return phones;
+            return items;
         }
-
         public void Save(string filename, ObservableCollection<AdditionalParametrs> phonesList)
         {
             DataContractJsonSerializer jsonFormatter = new DataContractJsonSerializer(typeof(ObservableCollection<AdditionalParametrs>));

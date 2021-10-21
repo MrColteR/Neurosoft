@@ -50,7 +50,7 @@
                   AlternatingRowBackground="White">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Название"
-                                    Width="50*"
+                                    Width="40*"
                                     Binding="{Binding Path = Title}"/>
                 <DataGridComboBoxColumn Header="Тип"
                                         Width="40*"
@@ -65,7 +65,7 @@
                         </col:ArrayList>
                     </DataGridComboBoxColumn.ItemsSource>
                 </DataGridComboBoxColumn>
-                <DataGridTemplateColumn>
+                <DataGridTemplateColumn Width="20*">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <Button Command="{Binding DataContext.OpenSecondWindowCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}}"
