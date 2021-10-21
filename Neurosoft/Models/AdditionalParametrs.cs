@@ -5,10 +5,20 @@ namespace Neurosoft.Models
 {
     public class AdditionalParametrs : Model
     {
+        private int id;
         private string title;
         private string type;
         private string additionalList;
         private List<string> additionalListArr;
+        public int Id
+        {
+            get { return id; }
+            set
+            {
+                id = value;
+                //OnPropertyChanged(nameof(Title)); // не надо
+            }
+        }
         public string Title
         {
             get { return title; }

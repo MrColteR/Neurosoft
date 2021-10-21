@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Neurosoft.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,14 +15,12 @@ using System.Windows.Shapes;
 
 namespace Neurosoft.Views
 {
-    /// <summary>
-    /// Логика взаимодействия для ListWindow.xaml
-    /// </summary>
     public partial class ListWindow : Window
     {
-        public ListWindow()
+        public ListWindow(List<string> list, int openedItemId, MainWindowViewModel view)
         {
             InitializeComponent();
+            DataContext = new ListWindowViewModel(list, openedItemId, view);
         }
     }
 }

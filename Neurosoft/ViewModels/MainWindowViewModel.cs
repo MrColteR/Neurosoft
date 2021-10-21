@@ -6,6 +6,7 @@ using System.Collections.ObjectModel;
 using Neurosoft.Models;
 using Neurosoft.Data.Base;
 using Neurosoft.Views;
+using System.Windows;
 
 namespace Neurosoft.ViewModels
 {
@@ -13,7 +14,6 @@ namespace Neurosoft.ViewModels
     {
         private readonly string fileName = $"{Environment.CurrentDirectory}\\List.json";
         IFileService fileService;
-
         #region Команды
         private RelayCommand addCommand;
         private RelayCommand removeCommand;
@@ -27,9 +27,10 @@ namespace Neurosoft.ViewModels
             {
                 return addCommand ?? (addCommand = new RelayCommand(obj =>
                 {
-                    AdditionalParametrs additionalParametrs = new AdditionalParametrs();
-                    DataList.Insert(0, additionalParametrs);
-                    SelectedDataList = additionalParametrs;
+                    AdditionalParametrs additionalParametrsItem = new AdditionalParametrs();
+                    additionalParametrsItem.Id = DataList.Count;
+                    DataList.Add(additionalParametrsItem);
+                    SelectedDataList = additionalParametrsItem;
                 }));
             }
         }
@@ -44,8 +45,7 @@ namespace Neurosoft.ViewModels
                     {
                         DataList.Remove(additionalParametrs);
                     }
-                },
-                    (obj) => DataList.Count > 0));
+                },(obj) => DataList.Count > 0));
             }
         }
         //public RelayCommand MoveUpCommand
@@ -67,7 +67,9 @@ namespace Neurosoft.ViewModels
                     AdditionalParametrs additionalParametrs = obj as AdditionalParametrs;
                     if (additionalParametrs.Type == "Значение из списка" || additionalParametrs.Type == "Набор значений из списка")
                     {
-                        ListWindow listWindow = new ListWindow();
+                        var data = SelectedDataList.AdditionalListArr;
+                        openedItemId = SelectedDataList.Id;
+                        ListWindow listWindow = new ListWindow(data, openedItemId, this);
                         listWindow.Show();
                     }
                 }));
@@ -90,23 +92,20 @@ namespace Neurosoft.ViewModels
             {
                 return closeWindowCommand ?? (closeWindowCommand = new RelayCommand(obj =>
                     {
-                        MainWindow mv = obj as MainWindow;
-                        mv.Close();
+                        Application.Current.MainWindow.Close();
                     }));
             }
-        }   /*o => ((MainWindow)o).Close())*/ // Спросить у Димы
-        
-
-    #endregion
-
-    private AdditionalParametrs selectedDataList;
+        }
+        #endregion
+        private int openedItemId;
+        private AdditionalParametrs selectedDataList;
         public AdditionalParametrs SelectedDataList
         {
             get { return selectedDataList; }
             set
             {
                 selectedDataList = value;
-                OnPropertyChanged("SelectedDataList");
+                OnPropertyChanged(nameof(SelectedDataList));
             }
         }
         public ObservableCollection<AdditionalParametrs> DataList { get; set; }

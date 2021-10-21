@@ -64,6 +64,7 @@
     <Compile Include="Data\JsonFileService.cs" />
     <Compile Include="Models\AdditionalParametrs.cs" />
     <Compile Include="Models\Base\Model.cs" />
+    <Compile Include="Models\ListParams.cs" />
     <Compile Include="ViewModels\Base\ViewModel.cs" />
     <Page Include="Views\ListWindow.xaml">
       <SubType>Designer</SubType>
@@ -77,6 +78,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="ViewModels\ListWindowViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="Views\ListWindow.xaml.cs">
       <DependentUpon>ListWindow.xaml</DependentUpon>

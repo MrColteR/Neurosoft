@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Neurosoft.Views"
         mc:Ignorable="d"
-        Title="ListWindow" Height="450" Width="800">
+        Title="Список" Height="450" Width="800">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="39*"/>
@@ -15,20 +15,106 @@
             <RowDefinition Height="20"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0,0,0" TextWrapping="Wrap" Text="Строки:" FontSize="16" Height="20" Width="56" />
-        <DataGrid x:Name="dgList" Margin="10" FontSize="14" Grid.Row="1" AutoGenerateColumns="False" HeadersVisibility="None" CanUserAddRows="False" Background="White">
+        <TextBlock HorizontalAlignment="Left"
+                   VerticalAlignment="Center"
+                   Margin="10,0,0,0"
+                   TextWrapping="Wrap"
+                   Text="Строки:"
+                   FontSize="16"
+                   Height="20"
+                   Width="56" />
+        <DataGrid x:Name="dgList"
+                  Margin="10"
+                  FontSize="14" 
+                  Grid.Row="1"
+                  AutoGenerateColumns="False"
+                  HeadersVisibility="None"
+                  CanUserAddRows="False"
+                  Background="White"
+                  GridLinesVisibility="None"
+                  ItemsSource="{Binding DataList}"
+                  SelectedItem="{Binding SelectedDataList}">
             <DataGrid.Columns>
-                <DataGridTextColumn Width="*" IsReadOnly="False"/>
+                <DataGridTextColumn Width="*"
+                                    IsReadOnly="False" 
+                                    Binding="{Binding Path = ItemList}"/>
             </DataGrid.Columns>
         </DataGrid>
-        <Button x:Name="btnUp" Content="Вверх" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,10,0,0" Grid.Column="1" Width="80" Grid.Row="1" FontSize="14" Height="23"/>
-        <Button x:Name="btnDown" Content="Вниз" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,40,0,0" Grid.Column="1" Width="80" Grid.Row="1" FontSize="14" Height="23"/>
-        <Button x:Name="btnDelete" Content="Удалить" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,70,0,0" Grid.Column="1"  Width="80" Grid.Row="1" FontSize="14" Height="23"/>
-        <Button x:Name="btnAdd" Content="Добавить..." HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,100,0,0" Grid.Column="1" Width="80" Grid.Row="1" FontSize="14" Height="23"/>
-        <Button x:Name="btnChange" Content="Изменить..." HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="1" Margin="0,130,0,0" Width="80" Grid.Row="1" FontSize="14" Height="23"/>
-
-        <Button x:Name="btnOkay" Content="ОК" HorizontalAlignment="Left" VerticalAlignment="Bottom"  Grid.Column="1" Margin="0,0,0,40" Width="80" Grid.Row="1" FontSize="14" Height="23"/>
-        <Button x:Name="btnClose" Content="Отмена" HorizontalAlignment="Left" VerticalAlignment="Bottom"  Grid.Column="1" Margin="0,0,0,10" Width="80" Grid.Row="1" FontSize="14" Height="23"/>
-
+        <Button x:Name="btnUp"
+                Content="Вверх" 
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Margin="0,10,0,0" 
+                Grid.Column="1" 
+                Width="80"
+                Grid.Row="1"
+                FontSize="14"
+                Height="23"/>
+        <Button x:Name="btnDown"
+                Content="Вниз"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Margin="0,40,0,0"
+                Grid.Column="1"
+                Width="80" 
+                Grid.Row="1" 
+                FontSize="14"
+                Height="23"/>
+        <Button x:Name="btnDelete" 
+                Command="{Binding RemoveCommand}"
+                CommandParameter="{Binding SelectedDataList}"
+                Content="Удалить"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top" 
+                Margin="0,70,0,0" 
+                Grid.Column="1" 
+                Width="80"
+                Grid.Row="1"
+                FontSize="14" 
+                Height="23"/>
+        <Button x:Name="btnAdd"
+                Command="{Binding AddCommand}"
+                Content="Добавить..." 
+                HorizontalAlignment="Left" 
+                VerticalAlignment="Top"
+                Margin="0,100,0,0"
+                Grid.Column="1"
+                Width="80"
+                Grid.Row="1"
+                FontSize="14" 
+                Height="23"/>
+        <!--<Button x:Name="btnChange"
+                Content="Изменить..." 
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top" 
+                Grid.Column="1" 
+                Margin="0,130,0,0"
+                Width="80" 
+                Grid.Row="1"
+                FontSize="14"
+                Height="23"/>-->
+        <Button x:Name="btnOkay"
+                Command="{Binding OkCommand}"
+                Content="ОК" 
+                HorizontalAlignment="Left"
+                VerticalAlignment="Bottom" 
+                Grid.Column="1"
+                Margin="0,0,0,40"
+                Width="80"
+                Grid.Row="1"
+                FontSize="14"
+                Height="23"/>
+        <Button x:Name="btnClose"
+                Command="{Binding CloseWindowCommand}"
+                CommandParameter="{Binding}"
+                Content="Отмена"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Bottom" 
+                Grid.Column="1" 
+                Margin="0,0,0,10" 
+                Width="80"
+                Grid.Row="1" 
+                FontSize="14" 
+                Height="23"/>
     </Grid>
 </Window>
