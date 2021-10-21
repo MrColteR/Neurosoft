@@ -12,9 +12,8 @@ namespace Neurosoft.ViewModels
 {
     public class MainWindowViewModel : ViewModel
     {
-        //private readonly string fileName = $"{Environment.CurrentDirectory}\\List.json";
         private static string path = Directory.GetCurrentDirectory();
-        public readonly string fileName = path.Substring(0, path.IndexOf("Neurosoft\\bin"))+"List.json";
+        public readonly string fileName = path.Substring(0, path.IndexOf("bin"))+"List.json";
         IFileService fileService;
         #region Команды
         private RelayCommand addCommand;
