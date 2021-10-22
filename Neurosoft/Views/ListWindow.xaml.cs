@@ -17,7 +17,7 @@ namespace Neurosoft.Views
 {
     public partial class ListWindow : Window
     {
-        public ListWindow(List<string> list, int openedItemId, MainWindowViewModel view)
+        public ListWindow(List<string> list, int openedItemId, AdditionalParametersViewModel view)
         {
             InitializeComponent();
             DataContext = new ListWindowViewModel(list, openedItemId, view);

@@ -68,7 +68,7 @@
                 <DataGridTemplateColumn Width="20*">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Command="{Binding DataContext.OpenSecondWindowCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}}"
+                            <Button Command="{Binding OpenSecondWindowCommand}"
                                     CommandParameter="{Binding}"
                                     Content="{Binding AdditionalList}"
                                     Background="Transparent" 

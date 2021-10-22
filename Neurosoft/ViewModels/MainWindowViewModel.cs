@@ -20,7 +20,7 @@ namespace Neurosoft.ViewModels
         private RelayCommand removeCommand;
         private RelayCommand moveUpCommand;
         private RelayCommand moveDownCommand;
-        private RelayCommand openSecondWindow;
+        //private RelayCommand openSecondWindow;
         private RelayCommand saveCommand;
         private RelayCommand closeWindowCommand;
         public RelayCommand AddCommand
@@ -29,7 +29,7 @@ namespace Neurosoft.ViewModels
             {
                 return addCommand ?? (addCommand = new RelayCommand(obj =>
                 {
-                    AdditionalParametrs additionalParametrsItem = new AdditionalParametrs();
+                    AdditionalParametersViewModel additionalParametrsItem = new AdditionalParametersViewModel();
                     additionalParametrsItem.Id = DataList.Count;
                     DataList.Add(additionalParametrsItem);
                     SelectedDataList = additionalParametrsItem;
@@ -42,7 +42,7 @@ namespace Neurosoft.ViewModels
             {
                 return removeCommand ?? (removeCommand = new RelayCommand(obj =>
                 {
-                    AdditionalParametrs additionalParametrs = obj as AdditionalParametrs;
+                    AdditionalParametersViewModel additionalParametrs = obj as AdditionalParametersViewModel;
                     if (additionalParametrs != null)
                     {
                         DataList.Remove(additionalParametrs);
@@ -56,7 +56,7 @@ namespace Neurosoft.ViewModels
             {
                 return moveUpCommand ?? (moveUpCommand = new RelayCommand(obj =>
                 {
-                    var item = obj as AdditionalParametrs;
+                    var item = obj as AdditionalParametersViewModel;
                     var index = DataList.IndexOf(item);
                     if (index != 0)
                     {
@@ -74,7 +74,7 @@ namespace Neurosoft.ViewModels
             {
                 return moveDownCommand ?? (moveDownCommand = new RelayCommand(obj =>
                 {
-                    var item = obj as AdditionalParametrs;
+                    var item = obj as AdditionalParametersViewModel;
                     var index = DataList.IndexOf(item);
                     if (index != DataList.Count - 1)
                     {
@@ -86,23 +86,23 @@ namespace Neurosoft.ViewModels
                 }));
             }
         }
-        public RelayCommand OpenSecondWindowCommand
-        {
-            get
-            {
-                return openSecondWindow ?? (openSecondWindow = new RelayCommand(obj =>
-                {
-                    AdditionalParametrs additionalParametrs = obj as AdditionalParametrs;
-                    if (additionalParametrs.Type == "Значение из списка" || additionalParametrs.Type == "Набор значений из списка")
-                    {
-                        var data = SelectedDataList.AdditionalListArr;
-                        openedItemId = SelectedDataList.Id;
-                        ListWindow listWindow = new ListWindow(data, openedItemId, this);
-                        listWindow.Show();
-                    }
-                }));
-            }
-        }
+        //public RelayCommand OpenSecondWindowCommand
+        //{
+        //    get
+        //    {
+        //        return openSecondWindow ?? (openSecondWindow = new RelayCommand(obj =>
+        //        {
+        //            AdditionalParametrs additionalParametrs = obj as AdditionalParametrs;
+        //            if (additionalParametrs.Type == "Значение из списка" || additionalParametrs.Type == "Набор значений из списка")
+        //            {
+        //                var data = SelectedDataList.AdditionalListArr;
+        //                openedItemId = SelectedDataList.Id;
+        //                ListWindow listWindow = new ListWindow(data, openedItemId, this);
+        //                listWindow.Show();
+        //            }
+        //        }));
+        //    }
+        //}
         public RelayCommand SaveCommand
         {
             get
@@ -111,6 +111,7 @@ namespace Neurosoft.ViewModels
                   (saveCommand = new RelayCommand(obj =>
                   {
                       fileService.Save(fileName, DataList);
+                      Application.Current.MainWindow.Close();
                   }));
             }
         }
@@ -125,9 +126,9 @@ namespace Neurosoft.ViewModels
             }
         }
         #endregion
-        private int openedItemId;
-        private AdditionalParametrs selectedDataList;
-        public AdditionalParametrs SelectedDataList
+        //private int openedItemId;
+        private AdditionalParametersViewModel selectedDataList;
+        public AdditionalParametersViewModel SelectedDataList
         {
             get { return selectedDataList; }
             set
@@ -146,7 +147,7 @@ namespace Neurosoft.ViewModels
                 OnPropertyChanged(nameof(SelectedIndex));
             }
         }
-        public ObservableCollection<AdditionalParametrs> DataList { get; set; }
+        public ObservableCollection<AdditionalParametersViewModel> DataList { get; set; }
         public MainWindowViewModel(IFileService fileService)
         {
             this.fileService = fileService;

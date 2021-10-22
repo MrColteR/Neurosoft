@@ -71,6 +71,7 @@
     <Compile Include="Models\AdditionalParametrs.cs" />
     <Compile Include="Models\Base\Model.cs" />
     <Compile Include="Models\ListParams.cs" />
+    <Compile Include="ViewModels\AdditionalParametersViewModel.cs" />
     <Compile Include="ViewModels\Base\ViewModel.cs" />
     <Page Include="Views\ListWindow.xaml">
       <SubType>Designer</SubType>

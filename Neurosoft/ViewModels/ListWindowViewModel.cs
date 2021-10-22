@@ -12,7 +12,7 @@ namespace Neurosoft.ViewModels
     class ListWindowViewModel : ViewModel
     {
         private int openedItemId;
-        private MainWindowViewModel view;
+        private AdditionalParametersViewModel view;
         #region Команды
         private RelayCommand addCommand;
         private RelayCommand removeCommand;
@@ -139,7 +139,7 @@ namespace Neurosoft.ViewModels
             }
         }
         public ObservableCollection<ListParams> DataList { get; set; }
-        public ListWindowViewModel(List<string> list, int openedItemId, MainWindowViewModel view)
+        public ListWindowViewModel(List<string> list, int openedItemId, AdditionalParametersViewModel view)
         {
             this.openedItemId = openedItemId;
             this.view = view;
