@@ -21,6 +21,7 @@ namespace Neurosoft.ViewModels
         private RelayCommand removeCommand;
         private RelayCommand moveUpCommand;
         private RelayCommand moveDownCommand;
+        private RelayCommand saveAndCloseCommand;
         private RelayCommand saveCommand;
         private RelayCommand closeWindowCommand;
         public RelayCommand AddCommand
@@ -87,6 +88,18 @@ namespace Neurosoft.ViewModels
                 }));
             }
         }
+        public RelayCommand SaveAndCloseCommand
+        {
+            get
+            {
+                return saveAndCloseCommand ??
+                  (saveAndCloseCommand = new RelayCommand(obj =>
+                  {
+                      fileService.Save(fileName, DataList);
+                      Application.Current.MainWindow.Close();
+                  }));
+            }
+        }
         public RelayCommand SaveCommand
         {
             get
@@ -95,7 +108,6 @@ namespace Neurosoft.ViewModels
                   (saveCommand = new RelayCommand(obj =>
                   {
                       fileService.Save(fileName, DataList);
-                      Application.Current.MainWindow.Close();
                   }));
             }
         }
@@ -128,22 +140,6 @@ namespace Neurosoft.ViewModels
             {
                 selectedIndex = value;
                 OnPropertyChanged(nameof(SelectedIndex));
-            }
-        }
-
-
-
-        private IEnumerable<MyEnum> itemSource;
-        public IEnumerable<MyEnum> ItemSource
-        {
-            get
-            {
-                return Enum.GetValues(typeof(MyEnum)).Cast<MyEnum>();
-            }
-            set
-            {
-                itemSource = value;
-                OnPropertyChanged(nameof(itemSource));
             }
         }
         public ObservableCollection<AdditionalParametersViewModel> DataList { get; set; }

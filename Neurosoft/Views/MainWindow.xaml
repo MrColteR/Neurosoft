@@ -81,15 +81,21 @@
         </DataGrid>
         <Button x:Name="btnSave"
                 Content="Ок" VerticalAlignment="Bottom"
-                HorizontalAlignment="Right" Margin="0,0,90,5"
+                HorizontalAlignment="Right" Margin="0,0,175,5"
                 Width="75"
-                Command="{Binding SaveCommand}"/>
+                Command="{Binding SaveAndCloseCommand}"/>
         <Button x:Name="btnSave_Copy"
                 Content="Отмена"
                 VerticalAlignment="Bottom"
                 HorizontalAlignment="Right"
                 Margin="0,0,5,5" Width="75"
                 Command="{Binding CloseWindowCommand}"/>
-        <ComboBox HorizontalAlignment="Left" Margin="157,394,0,0" VerticalAlignment="Top" Width="120"  ItemsSource="{Binding ItemSource}" />
+        <Button Content="Сохранить"
+                VerticalAlignment="Bottom"
+                HorizontalAlignment="Right"
+                Margin="0,0,90,5"
+                Width="75"
+                Command="{Binding SaveCommand}"/>
+
     </Grid>
 </Window>

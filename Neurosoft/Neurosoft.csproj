@@ -67,9 +67,7 @@
     </ApplicationDefinition>
     <Compile Include="Command\RelayCommand.cs" />
     <Compile Include="Data\Base\IFileService.cs" />
-    <Compile Include="Data\BindingEnum.cs" />
     <Compile Include="Data\JsonFileService.cs" />
-    <Compile Include="Data\MyEnum.cs" />
     <Compile Include="Models\AdditionalParametrs.cs" />
     <Compile Include="Models\Base\Model.cs" />
     <Compile Include="Models\ListParams.cs" />
