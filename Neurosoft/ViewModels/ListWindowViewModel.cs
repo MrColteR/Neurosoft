@@ -12,6 +12,7 @@ namespace Neurosoft.ViewModels
     class ListWindowViewModel : ViewModel
     {
         private int openedItemId;
+        private int index;
         private AdditionalParametersViewModel view;
         #region Команды
         private RelayCommand addCommand;
@@ -26,9 +27,10 @@ namespace Neurosoft.ViewModels
             {
                 return addCommand ?? (addCommand = new RelayCommand(obj =>
                 {
-                    ListParams listParamsItem = new ListParams("");
+                    ListParams listParamsItem = new ListParams($"Параметр {index}");
                     DataList.Add(listParamsItem);
                     SelectedDataList = listParamsItem;
+                    index++;
                 }));
             }
         }
@@ -95,7 +97,7 @@ namespace Neurosoft.ViewModels
                         {
                             list.Add(item.ItemList);
                         }
-                        view.DataList[openedItemId].AdditionalListArr = list;
+                        view.AdditionalListArr = list;
                     }
                     else
                     {
@@ -156,7 +158,6 @@ namespace Neurosoft.ViewModels
             {
                 DataList = new ObservableCollection<ListParams>(tmpList);
             }
-            
         }
     }
 }

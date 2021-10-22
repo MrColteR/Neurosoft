@@ -36,7 +36,7 @@ namespace Neurosoft.Models
         }
         public string AdditionalList
         {
-            get { return additionalList = "Список..."; }
+            get { return additionalList; }
             set
             {
                 additionalList = value;

@@ -15,16 +15,6 @@ namespace Neurosoft.ViewModels
         private string type;
         private string additionalList;
         private List<string> additionalListArr;
-        private AdditionalParametersViewModel selectedDataList;
-        public AdditionalParametersViewModel SelectedDataList
-        {
-            get { return selectedDataList; }
-            set
-            {
-                selectedDataList = value;
-                OnPropertyChanged(nameof(SelectedDataList));
-            }
-        }
         public int Id
         {
             get { return id; }
@@ -66,6 +56,7 @@ namespace Neurosoft.ViewModels
             get { return additionalListArr; }
             set { additionalListArr = value; OnPropertyChanged(nameof(AdditionalListArr)); }
         }
+        #region Команды
         private RelayCommand openSecondWindow;
         public RelayCommand OpenSecondWindowCommand
         {
@@ -76,18 +67,15 @@ namespace Neurosoft.ViewModels
                     AdditionalParametersViewModel additionalParametrs = obj as AdditionalParametersViewModel;
                     if (additionalParametrs.Type == "Значение из списка" || additionalParametrs.Type == "Набор значений из списка")
                     {
-                        var data = SelectedDataList.AdditionalListArr;
-                        openedItemId = SelectedDataList.Id;
+                        var data = additionalParametrs.AdditionalListArr;
+                        openedItemId = additionalParametrs.Id;
                         ListWindow listWindow = new ListWindow(data, openedItemId, this);
-                        listWindow.Show();
+                        listWindow.ShowDialog();
                     }
                 }));
             }
         }
+        #endregion
         public ObservableCollection<AdditionalParametrs> DataList { get; set; }
-        public AdditionalParametersViewModel()
-        {
-
-        }
     }
 }
