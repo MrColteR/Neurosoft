@@ -66,11 +66,13 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Command\RelayCommand.cs" />
+    <Compile Include="ConvertToString.cs" />
     <Compile Include="Data\Base\IFileService.cs" />
     <Compile Include="Data\JsonFileService.cs" />
     <Compile Include="Models\AdditionalParametrs.cs" />
     <Compile Include="Models\Base\Model.cs" />
     <Compile Include="Models\ListParams.cs" />
+    <Compile Include="MyEnum.cs" />
     <Compile Include="ViewModels\AdditionalParametersViewModel.cs" />
     <Compile Include="ViewModels\Base\ViewModel.cs" />
     <Page Include="Views\ListWindow.xaml">

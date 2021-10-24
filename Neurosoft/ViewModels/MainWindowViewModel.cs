@@ -142,6 +142,21 @@ namespace Neurosoft.ViewModels
                 OnPropertyChanged(nameof(SelectedIndex));
             }
         }
+        private List<ParametrType> parametrTypes = new List<ParametrType>()
+        {
+            ParametrType.simpleString,
+            ParametrType.stringWithHistory,
+            ParametrType.valueFromList,
+            ParametrType.SetOfValueFromList
+        };
+        public List<ParametrType> ParametrTypes
+        {
+            get { return parametrTypes; }
+            set
+            {
+                parametrTypes = value;
+            }
+        }
         public ObservableCollection<AdditionalParametersViewModel> DataList { get; set; }
         public MainWindowViewModel(IFileService fileService)
         {

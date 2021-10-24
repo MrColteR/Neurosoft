@@ -12,9 +12,9 @@ namespace Neurosoft.ViewModels
         private int openedItemId;
         private int id;
         private string title;
-        private string type;
         private string additionalList;
         private List<string> additionalListArr;
+        private ParametrType parametrType;
         public int Id
         {
             get { return id; }
@@ -33,15 +33,6 @@ namespace Neurosoft.ViewModels
                 OnPropertyChanged(nameof(Title));
             }
         }
-        public string Type
-        {
-            get { return type; }
-            set
-            {
-                type = value;
-                OnPropertyChanged(nameof(Type));
-            }
-        }
         public string AdditionalList
         {
             get { return additionalList = "Список..."; ; }
@@ -56,6 +47,18 @@ namespace Neurosoft.ViewModels
             get { return additionalListArr; }
             set { additionalListArr = value; OnPropertyChanged(nameof(AdditionalListArr)); }
         }
+        public ParametrType ParametrType
+        {
+            get { return parametrType; }
+            set
+            {
+                if (parametrType != value)
+                {
+                    parametrType = value;
+                    OnPropertyChanged(nameof(ParametrType));
+                }
+            }
+        }
         #region Команды
         private RelayCommand openSecondWindow;
         public RelayCommand OpenSecondWindowCommand
@@ -64,11 +67,12 @@ namespace Neurosoft.ViewModels
             {
                 return openSecondWindow ?? (openSecondWindow = new RelayCommand(obj =>
                 {
-                    AdditionalParametersViewModel additionalParametrs = obj as AdditionalParametersViewModel;
-                    if (additionalParametrs.Type == "Значение из списка" || additionalParametrs.Type == "Набор значений из списка")
+                    AdditionalParametersViewModel additionalParametrsList = obj as AdditionalParametersViewModel;
+                    var a = additionalParametrsList.parametrType;
+                    if (additionalParametrsList.parametrType == ParametrType.valueFromList || additionalParametrsList.parametrType == ParametrType.SetOfValueFromList)
                     {
-                        var data = additionalParametrs.AdditionalListArr;
-                        openedItemId = additionalParametrs.Id;
+                        var data = additionalParametrsList.AdditionalListArr;
+                        openedItemId = additionalParametrsList.Id;
                         ListWindow listWindow = new ListWindow(data, openedItemId, this);
                         listWindow.ShowDialog();
                     }
