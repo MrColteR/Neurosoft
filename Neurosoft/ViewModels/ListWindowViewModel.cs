@@ -9,7 +9,7 @@ using System.Windows;
 
 namespace Neurosoft.ViewModels
 {
-    class ListWindowViewModel : ViewModel
+    public class ListWindowViewModel : ViewModel
     {
         private int openedItemId;
         private int index;
@@ -20,7 +20,7 @@ namespace Neurosoft.ViewModels
         private RelayCommand moveUpCommand;
         private RelayCommand moveDownCommand;
         private RelayCommand okCommand;
-        private RelayCommand closeWindowCommand;
+        //private RelayCommand closeWindowCommand;
         public RelayCommand AddCommand
         {
             get
@@ -90,36 +90,38 @@ namespace Neurosoft.ViewModels
             {
                 return okCommand ?? (okCommand = new RelayCommand(obj =>
                 {
-                    List<string> list = new List<string>();
-                    if (list != null)
-                    {
-                        foreach (var item in DataList)
-                        {
-                            list.Add(item.ItemList);
-                        }
-                        view.AdditionalListArr = list;
-                    }
-                    else
-                    {
-                        view.DataList[openedItemId].AdditionalListArr = null;
-                    }
-                    ListWindow wnd = (ListWindow)Application.Current.Windows.OfType<Window>().SingleOrDefault(x => x.IsActive);
-                    wnd.Close();
+                    ApplyChange();
                 }));
             }
         }
-        public RelayCommand CloseWindowCommand
-        {
-            get
-            {
-                return closeWindowCommand ?? (closeWindowCommand = new RelayCommand(obj =>
-                {
-                    ListWindow wnd = (ListWindow)Application.Current.Windows.OfType<Window>().SingleOrDefault(x => x.IsActive);
-                    wnd.Close();
-                }));
-            }
-        }
+        //public RelayCommand CloseWindowCommand
+        //{
+        //    get
+        //    {
+        //        return closeWindowCommand ?? (closeWindowCommand = new RelayCommand(obj =>
+        //        {
+        //            //ListWindow wnd = (ListWindow)Application.Current.Windows.OfType<Window>().SingleOrDefault(x => x.IsActive);
+        //            //wnd.Close();
+        //        }));
+        //    }
+        //}
         #endregion
+        public void ApplyChange()
+        {
+            List<string> list = new List<string>();
+            if (list != null)
+            {
+                foreach (var item in DataList)
+                {
+                    list.Add(item.ItemList);
+                }
+                view.AdditionalListArr = list;
+            }
+            else
+            {
+                view.AdditionalListArr = null;
+            }
+        }
         private ListParams selectedDataList;
         public ListParams SelectedDataList
         {
@@ -141,14 +143,14 @@ namespace Neurosoft.ViewModels
             }
         }
         public ObservableCollection<ListParams> DataList { get; set; }
-        public ListWindowViewModel(List<string> list, int openedItemId, AdditionalParametersViewModel view)
+        public ListWindowViewModel(AdditionalParametersViewModel viewModel)
         {
-            this.openedItemId = openedItemId;
-            this.view = view;
+            openedItemId = viewModel.Id;
+            view = viewModel;
             List<ListParams> tmpList = new List<ListParams>();
-            if (list != null)
+            if (viewModel.AdditionalListArr != null)
             {
-                foreach (var item in list)
+                foreach (var item in viewModel.AdditionalListArr)
                 {
                     tmpList.Add(new ListParams(item));
                 }

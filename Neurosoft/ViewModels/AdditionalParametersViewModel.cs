@@ -68,18 +68,18 @@ namespace Neurosoft.ViewModels
                 return openSecondWindow ?? (openSecondWindow = new RelayCommand(obj =>
                 {
                     AdditionalParametersViewModel additionalParametrsList = obj as AdditionalParametersViewModel;
-                    var a = additionalParametrsList.parametrType;
                     if (additionalParametrsList.parametrType == ParametrType.valueFromList || additionalParametrsList.parametrType == ParametrType.SetOfValueFromList)
                     {
-                        var data = additionalParametrsList.AdditionalListArr;
-                        openedItemId = additionalParametrsList.Id;
-                        ListWindow listWindow = new ListWindow(data, openedItemId, this);
-                        listWindow.ShowDialog();
+                        var viewModel = new ListWindowViewModel(additionalParametrsList);
+                        ListWindow listWindow = new ListWindow(viewModel);
+                        if (listWindow.ShowDialog() == true)
+                        {
+                            viewModel.ApplyChange();
+                        }
                     }
                 }));
             }
         }
         #endregion
-        public ObservableCollection<AdditionalParametrs> DataList { get; set; }
     }
 }

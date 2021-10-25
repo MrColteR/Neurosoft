@@ -155,6 +155,7 @@ namespace Neurosoft.ViewModels
             set
             {
                 parametrTypes = value;
+                OnPropertyChanged(nameof(ParametrTypes));
             }
         }
         public ObservableCollection<AdditionalParametersViewModel> DataList { get; set; }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Neurosoft.Models
 {
-    class ListParams : Model
+    public class ListParams : Model
     {
         private string itemList;
         public string ItemList

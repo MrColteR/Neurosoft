@@ -17,10 +17,18 @@ namespace Neurosoft.Views
 {
     public partial class ListWindow : Window
     {
-        public ListWindow(List<string> list, int openedItemId, AdditionalParametersViewModel view)
+        public ListWindow(ListWindowViewModel viewModel)
         {
             InitializeComponent();
-            DataContext = new ListWindowViewModel(list, openedItemId, view);
+            DataContext = viewModel;
+        }
+        private void btnOkay_Click(object sender, RoutedEventArgs e)
+        {
+            DialogResult = true;
+        }
+        private void btnClose_Click(object sender, RoutedEventArgs e)
+        {
+            DialogResult = false;
         }
     }
 }

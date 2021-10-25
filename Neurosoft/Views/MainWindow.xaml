@@ -4,8 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Neurosoft"
-        xmlns:col="clr-namespace:System.Collections;assembly=mscorlib"
-        xmlns:sys="clr-namespace:System;assembly=mscorlib"
+        xmlns:System="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
         Title="MainWindow" Height="450" Width="800">
@@ -54,19 +53,6 @@
                 <DataGridTextColumn Header="Название"
                                     Width="40*"
                                     Binding="{Binding Title}"/>
-                <!--<DataGridComboBoxColumn Header="Тип"
-                                        Width="40*"
-                                        IsReadOnly="False" 
-                                        SelectedItemBinding="{Binding Path = Type}">
-                    <DataGridComboBoxColumn.ItemsSource>
-                        <col:ArrayList>
-                            <sys:String>Простая строка</sys:String>
-                            <sys:String>Строка с историей</sys:String>
-                            <sys:String>Значение из списка</sys:String>
-                            <sys:String>Набор значений из списка</sys:String>
-                        </col:ArrayList>
-                    </DataGridComboBoxColumn.ItemsSource>
-                </DataGridComboBoxColumn>-->
                 <DataGridComboBoxColumn Header="Тип"
                                         Width="40*"
                                         IsReadOnly="False" 
@@ -74,7 +60,7 @@
                     <DataGridComboBoxColumn.ElementStyle>
                         <Style TargetType="ComboBox">
                             <Setter Property="ItemsSource"
-                                    Value="{Binding DataContext.ParametrTypes, RelativeSource={RelativeSource AncestorType=Window, Mode=FindAncestor}}"/>
+                                    Value="{Binding DataContext.ParametrTypes, RelativeSource={RelativeSource AncestorType=DataGrid, Mode=FindAncestor}}"/>
                             <Setter Property="ItemTemplate">
                                 <Setter.Value>
                                     <DataTemplate>
@@ -87,7 +73,7 @@
                     <DataGridComboBoxColumn.EditingElementStyle>
                         <Style TargetType="ComboBox">
                             <Setter Property="ItemsSource"
-                                    Value="{Binding DataContext.ParametrTypes, RelativeSource={RelativeSource AncestorType=Window, Mode=FindAncestor}}"/>
+                                    Value="{Binding DataContext.ParametrTypes, RelativeSource={RelativeSource AncestorType=DataGrid, Mode=FindAncestor}}"/>
                             <Setter Property="ItemTemplate">
                                 <Setter.Value>
                                     <DataTemplate>
