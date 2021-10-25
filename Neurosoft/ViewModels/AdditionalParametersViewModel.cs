@@ -1,15 +1,19 @@
 ﻿using Neurosoft.Command;
-using Neurosoft.Models;
+using Neurosoft.Data.Base;
+//using Neurosoft.Models;
 using Neurosoft.ViewModels.Base;
 using Neurosoft.Views;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Windows;
+using System.Windows.Controls;
+//using System.ComponentModel.DataAnnotations;
 
 namespace Neurosoft.ViewModels
 {
-    public class AdditionalParametersViewModel : ViewModel
+    public class AdditionalParametersViewModel : ViewModel/*, IEditableObject*/
     {
-        private int openedItemId;
         private int id;
         private string title;
         private string additionalList;
@@ -26,11 +30,37 @@ namespace Neurosoft.ViewModels
         }
         public string Title
         {
+            //get
+            //{
+            //    return title;
+            //}
+            //set
+            //{
+            //    if (title == value) return;
+            //    title = value;
+            //    OnPropertyChanged(nameof(Title));
+            //}
             get { return title; }
             set
             {
-                title = value;
-                OnPropertyChanged(nameof(Title));
+                if (DataList == null)
+                {
+                    title = value;
+                    OnPropertyChanged(nameof(Title));
+                }
+                else
+                {
+                    foreach (var item in DataList)
+                    {
+                        if (value == item.title)
+                        {
+                            //MessageBox.Show("Имя занято");
+                            return;
+                        }
+                    }
+                    title = value;
+                    OnPropertyChanged(nameof(Title));
+                }
             }
         }
         public string AdditionalList
@@ -45,7 +75,11 @@ namespace Neurosoft.ViewModels
         public List<string> AdditionalListArr
         {
             get { return additionalListArr; }
-            set { additionalListArr = value; OnPropertyChanged(nameof(AdditionalListArr)); }
+            set 
+            { 
+                additionalListArr = value;
+                OnPropertyChanged(nameof(AdditionalListArr));
+            }
         }
         public ParametrType ParametrType
         {
@@ -81,5 +115,50 @@ namespace Neurosoft.ViewModels
             }
         }
         #endregion
+        //private void Examination()
+        //{
+        //    foreach (var item in DataList)
+        //    {
+        //        if (title == item.title)
+        //        {
+        //            MessageBox.Show("пп");
+        //        }
+        //        else
+        //        {
+        //            title = value;
+        //            OnPropertyChanged(nameof(Title));
+        //        }
+        //    }
+        //}
+        static public ObservableCollection<AdditionalParametersViewModel> DataList { get; set; }
+        public AdditionalParametersViewModel() { }
+        public AdditionalParametersViewModel(ObservableCollection<AdditionalParametersViewModel> data)
+        {
+            DataList = data;
+        }
+
+        //private AdditionalParametersViewModel backupCopy;
+        //private bool inEdit;
+
+        //public void BeginEdit()
+        //{
+        //    if (inEdit) return;
+        //    inEdit = true;
+        //    backupCopy = this.MemberwiseClone() as AdditionalParametersViewModel;
+        //}
+
+        //public void EndEdit()
+        //{
+        //    if (!inEdit) return;
+        //    inEdit = false;
+        //    this.Title = backupCopy.Title;
+        //}
+
+        //public void CancelEdit()
+        //{
+        //    if (!inEdit) return;
+        //    inEdit = false;
+        //    backupCopy = null;
+        //}
     }
 }

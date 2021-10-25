@@ -20,6 +20,7 @@ namespace Neurosoft.ViewModels
         private RelayCommand moveUpCommand;
         private RelayCommand moveDownCommand;
         private RelayCommand okCommand;
+        //private RelayCommand changeCommand;
         //private RelayCommand closeWindowCommand;
         public RelayCommand AddCommand
         {
@@ -94,6 +95,22 @@ namespace Neurosoft.ViewModels
                 }));
             }
         }
+        //public RelayCommand ChangeCommand
+        //{
+        //    get
+        //    {
+        //        return changeCommand ?? (changeCommand = new RelayCommand(obj =>
+        //        {
+        //            var items = obj as ListWindow;
+        //            items.
+                    //obj.IsReadOnly;
+                    //foreach (var item in items.ItemList)
+                    //{
+
+                    //}
+        //        }));
+        //    }
+        //}
         //public RelayCommand CloseWindowCommand
         //{
         //    get

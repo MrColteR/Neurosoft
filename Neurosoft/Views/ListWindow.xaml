@@ -37,7 +37,7 @@
                   SelectedIndex="{Binding SelectedIndex}">
             <DataGrid.Columns>
                 <DataGridTextColumn Width="*"
-                                    IsReadOnly="False" 
+                                    IsReadOnly="True" 
                                     Binding="{Binding Path = ItemList}"/>
             </DataGrid.Columns>
         </DataGrid>
@@ -89,6 +89,8 @@
                 FontSize="14" 
                 Height="23"/>
         <!--<Button x:Name="btnChange"
+                Command="{Binding ChangeCommand}"
+                CommandParameter="{Binding DataList}"
                 Content="Изменить..." 
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top" 

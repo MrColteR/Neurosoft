@@ -158,11 +158,12 @@ namespace Neurosoft.ViewModels
                 OnPropertyChanged(nameof(ParametrTypes));
             }
         }
-        public ObservableCollection<AdditionalParametersViewModel> DataList { get; set; }
+        static public ObservableCollection<AdditionalParametersViewModel> DataList { get; set; }
         public MainWindowViewModel(IFileService fileService)
         {
             this.fileService = fileService;
             DataList = fileService.Open(fileName);
+            AdditionalParametersViewModel viewModel = new AdditionalParametersViewModel(DataList);
         }
     }
 }
