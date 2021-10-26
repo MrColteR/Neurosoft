@@ -9,7 +9,7 @@ using System.Windows.Controls;
 
 namespace Neurosoft.ViewModels
 {
-    public class AdditionalParametersViewModel : ViewModel/*, IEditableObject*/
+    public class AdditionalParametersViewModel : ViewModel
     {
         private int id;
         private string title;
@@ -27,7 +27,7 @@ namespace Neurosoft.ViewModels
         }
         public string Title
         {
-            get { return title; } // перенести message box в view или в отдельный метод
+            get { return title; } 
             set
             {
                 title = value;
@@ -86,35 +86,11 @@ namespace Neurosoft.ViewModels
             }
         }
         #endregion
-        /*static*/ public ObservableCollection<AdditionalParametersViewModel> DataList { get; set; }
+        public ObservableCollection<AdditionalParametersViewModel> DataList { get; set; }
         public AdditionalParametersViewModel() { }
         public AdditionalParametersViewModel(ObservableCollection<AdditionalParametersViewModel> data)
         {
             DataList = data;
         }
-
-        //private AdditionalParametersViewModel backupCopy;
-        //private bool inEdit;
-
-        //public void BeginEdit()
-        //{
-        //    if (inEdit) return;
-        //    inEdit = true;
-        //    backupCopy = this.MemberwiseClone() as AdditionalParametersViewModel;
-        //}
-
-        //public void EndEdit()
-        //{
-        //    if (!inEdit) return;
-        //    inEdit = false;
-        //    this.Title = backupCopy.Title;
-        //}
-
-        //public void CancelEdit()
-        //{
-        //    if (!inEdit) return;
-        //    inEdit = false;
-        //    backupCopy = null;
-        //}
     }
 }

@@ -37,7 +37,7 @@
                   SelectedIndex="{Binding SelectedIndex}" RowEditEnding="dgList_RowEditEnding">
             <DataGrid.Columns>
                 <DataGridTextColumn Width="*" 
-                                    Binding="{Binding Path = ItemList}"/>
+                                    Binding="{Binding Path = ListValue}"/>
             </DataGrid.Columns>
         </DataGrid>
         <Button x:Name="btnUp"

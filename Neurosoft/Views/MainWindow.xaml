@@ -37,7 +37,7 @@
                 <Image Source="/Image/btnDelete.png" MaxHeight="32"/>
             </Button>
         </ToolBar>
-        
+
         <DataGrid x:Name="dgList"
                   FontSize="16" Margin="0,40,0,30"
                   ItemsSource="{Binding DataList}"
@@ -49,27 +49,10 @@
                   GridLinesVisibility="None"
                   RowBackground="LightGray"
                   AlternatingRowBackground="White" RowEditEnding="dgList_RowEditEnding">
-
-            <DataGrid.Resources>
-                <Style x:Key="errorStyle" TargetType="{x:Type TextBox}">
-                    <Setter Property="Padding" Value="-2"/>
-                    <Style.Triggers>
-                        <Trigger Property="Validation.HasError" Value="True">
-                            <Setter Property="Background" Value="Red"/>
-                            <Setter Property="ToolTip" 
-                                Value="{Binding RelativeSource={RelativeSource Self},
-                                Path=(Validation.Errors)[0].ErrorContent}"/>
-                        </Trigger>
-                    </Style.Triggers>
-                </Style>
-            </DataGrid.Resources>
-
-
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Название"
                                     Width="40*"
-                                    EditingElementStyle="{StaticResource errorStyle}"
-                                    Binding="{Binding Title, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}"/>
+                                    Binding="{Binding Title}"/>
                 <DataGridComboBoxColumn Header="Тип"
                                         Width="40*"
                                         IsReadOnly="False" 

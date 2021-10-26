@@ -29,7 +29,8 @@ namespace Neurosoft.ViewModels
                 return addCommand ?? (addCommand = new RelayCommand(obj =>
                 {
                     var index = DataList.Count;
-                    ListParams listParamsItem = new ListParams($"Параметр {index}");
+                    ListValuesViewModel listParamsItem = new ListValuesViewModel();
+                    listParamsItem.ListValue = $"Параметр {index}";
                     DataList.Add(listParamsItem);
                     SelectedDataList = listParamsItem;
                     index++;
@@ -42,7 +43,7 @@ namespace Neurosoft.ViewModels
             {
                 return removeCommand ?? (removeCommand = new RelayCommand(obj =>
                 {
-                    ListParams listParams = obj as ListParams;
+                    ListValuesViewModel listParams = obj as ListValuesViewModel;
                     if (listParams != null)
                     {
                         DataList.Remove(listParams);
@@ -56,7 +57,7 @@ namespace Neurosoft.ViewModels
             {
                 return moveUpCommand ?? (moveUpCommand = new RelayCommand(obj =>
                 {
-                    var item = obj as ListParams;
+                    var item = obj as ListValuesViewModel;
                     var index = DataList.IndexOf(item);
                     if (index != 0)
                     {
@@ -74,7 +75,7 @@ namespace Neurosoft.ViewModels
             {
                 return moveDownCommand ?? (moveDownCommand = new RelayCommand(obj =>
                 {
-                    var item = obj as ListParams;
+                    var item = obj as ListValuesViewModel;
                     var index = DataList.IndexOf(item);
                     if (index != DataList.Count - 1)
                     {
@@ -96,33 +97,6 @@ namespace Neurosoft.ViewModels
                 }));
             }
         }
-        //public RelayCommand ChangeCommand
-        //{
-        //    get
-        //    {
-        //        return changeCommand ?? (changeCommand = new RelayCommand(obj =>
-        //        {
-        //            var items = obj as ListWindow;
-        //            items.
-                    //obj.IsReadOnly;
-                    //foreach (var item in items.ItemList)
-                    //{
-
-                    //}
-        //        }));
-        //    }
-        //}
-        //public RelayCommand CloseWindowCommand
-        //{
-        //    get
-        //    {
-        //        return closeWindowCommand ?? (closeWindowCommand = new RelayCommand(obj =>
-        //        {
-        //            //ListWindow wnd = (ListWindow)Application.Current.Windows.OfType<Window>().SingleOrDefault(x => x.IsActive);
-        //            //wnd.Close();
-        //        }));
-        //    }
-        //}
         #endregion
         public void ApplyChange()
         {
@@ -131,7 +105,7 @@ namespace Neurosoft.ViewModels
             {
                 foreach (var item in DataList)
                 {
-                    list.Add(item.ItemList);
+                    list.Add(item.ListValue);
                 }
                 view.AdditionalListArr = list;
             }
@@ -140,8 +114,8 @@ namespace Neurosoft.ViewModels
                 view.AdditionalListArr = null;
             }
         }
-        private ListParams selectedDataList;
-        public ListParams SelectedDataList
+        private ListValuesViewModel selectedDataList;
+        public ListValuesViewModel SelectedDataList
         {
             get { return selectedDataList; }
             set
@@ -160,23 +134,27 @@ namespace Neurosoft.ViewModels
                 OnPropertyChanged(nameof(SelectedIndex));
             }
         }
-        public ObservableCollection<ListParams> DataList { get; set; }
+        public ObservableCollection<ListValuesViewModel> DataList { get; set; }
         public ListWindowViewModel(AdditionalParametersViewModel viewModel)
         {
             openedItemId = viewModel.Id;
             view = viewModel;
-            List<ListParams> tmpList = new List<ListParams>();
+            List<ListValuesViewModel> tmpList = new List<ListValuesViewModel>();
             if (viewModel.AdditionalListArr != null)
             {
-                foreach (var item in viewModel.AdditionalListArr)
+                for (int i = 0; i < viewModel.AdditionalListArr.Count; i++)
                 {
-                    tmpList.Add(new ListParams(item));
+                    ListValuesViewModel item = new ListValuesViewModel();
+                    item.ListValue = viewModel.AdditionalListArr[i];
+                    tmpList.Add(item);
                 }
-                DataList = new ObservableCollection<ListParams>(tmpList);
+                DataList = new ObservableCollection<ListValuesViewModel>(tmpList);
+                ListValuesViewModel listValuesView = new ListValuesViewModel(DataList);
             }
             else
             {
-                DataList = new ObservableCollection<ListParams>(tmpList);
+                DataList = new ObservableCollection<ListValuesViewModel>(tmpList);
+                ListValuesViewModel listValuesView = new ListValuesViewModel(DataList);
             }
         }
     }
