@@ -10,6 +10,16 @@ namespace Neurosoft.ViewModels
 {
     public class ListValuesViewModel : ViewModel
     {
+        private int id;
+        public int Id
+        {
+            get { return id; }
+            set
+            {
+                id = value;
+                OnPropertyChanged(nameof(Id));
+            }
+        }
         private string listValue;
         public string ListValue
         {

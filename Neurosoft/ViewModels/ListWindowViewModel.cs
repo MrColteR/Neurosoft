@@ -30,6 +30,7 @@ namespace Neurosoft.ViewModels
                 {
                     var index = DataList.Count;
                     ListValuesViewModel listParamsItem = new ListValuesViewModel();
+                    listParamsItem.Id = DataList.Count;
                     listParamsItem.ListValue = $"Параметр {index}";
                     DataList.Add(listParamsItem);
                     SelectedDataList = listParamsItem;

@@ -52,7 +52,7 @@
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Название"
                                     Width="40*"
-                                    Binding="{Binding Title}"/>
+                                    Binding="{Binding Title, UpdateSourceTrigger=PropertyChanged}"/>
                 <DataGridComboBoxColumn Header="Тип"
                                         Width="40*"
                                         IsReadOnly="False" 

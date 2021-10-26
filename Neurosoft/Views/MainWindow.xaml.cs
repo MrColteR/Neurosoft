@@ -1,5 +1,6 @@
 ﻿using Neurosoft.Data.Base;
 using Neurosoft.ViewModels;
+using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -12,25 +13,24 @@ namespace Neurosoft
             InitializeComponent();
             DataContext = new MainWindowViewModel(new JsonFileService());
         }
+
         private void dgList_RowEditEnding(object sender, DataGridRowEditEndingEventArgs e)
         {
-            //if (dgList != null)
-            //{
-            //    var row = e.Row.Item;
-            //    var viewModel = DataContext as MainWindowViewModel;
-            //    var row1 = viewModel.SelectedDataList;
-            //    var dataGrid = viewModel.DataList;
-            //    var index = viewModel.SelectedIndex;
-                //for (int i = 0; i < dataGrid.Count; i++)
-                //{
-                //    if (row == dataGrid[i].Title && index != i)
-                //    {
-                //        MessageBox.Show("Это имя уже существет");
-                //        dataGrid[i].Title = "";
-                //        return;
-                //    }
-                //}
-            //}
+            if (dgList != null)
+            {
+                var row = (e.Row.Item as AdditionalParametersViewModel).Title;
+                var index = (e.Row.Item as AdditionalParametersViewModel).Id;
+                var datagrid = (sender as DataGrid).ItemsSource as ObservableCollection<AdditionalParametersViewModel>;
+                for (int i = 0; i < datagrid.Count; i++)
+                {
+                    if (row == datagrid[i].Title && index != i)
+                    {
+                        MessageBox.Show("Это имя уже существет");
+                        datagrid[index].Title = "";
+                        return;
+                    }
+                }
+            }
         }
     }
 }

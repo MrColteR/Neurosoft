@@ -1,6 +1,7 @@
 ﻿using Neurosoft.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -34,20 +35,19 @@ namespace Neurosoft.Views
         {
             //if (dgList != null)
             //{
-            //    //e.Row.Item
-            //    //    sender.
-            //    var viewModel = DataContext as ListWindowViewModel;
-            //    var row = viewModel.SelectedDataList;
-            //    var dataGrid = viewModel.DataList;
-            //    var index = viewModel.SelectedIndex;
-            //    for (int i = 0; i < dataGrid.Count; i++)
-            //    {
-            //        if (row.ItemList == dataGrid[i].ItemList && index != i)
-            //        {
-            //            MessageBox.Show("Это имя уже существет");
-            //            dataGrid[i].ItemList = "";
-            //            return;
-            //        }
+            //    var row = (e.Row.Item as ListValuesViewModel).ListValue;
+                //var index = (e.Row.Item as ListValuesViewModel).;
+                //var index = (e.Row.Item as ListValuesViewModel).Id;
+                //var a = e.Row.Item;
+                //var datagrid = (sender as DataGrid).ItemsSource as ObservableCollection<ListValuesViewModel>;
+                //for (int i = 0; i < datagrid.Count; i++)
+                //{
+                    //if (row == datagrid[i].ListValue && index != i)
+                    //{
+                    //    MessageBox.Show("Это имя уже существет");
+                    //    datagrid[index].ListValue = "";
+                    //    return;
+                    //}
             //    }
             //}
         }
