@@ -49,7 +49,7 @@
                   GridLinesVisibility="None"
                   RowBackground="LightGray"
                   AlternatingRowBackground="White" RowEditEnding="dgList_RowEditEnding"
-                  SelectionMode="Single">
+                  SelectionMode="Single" BeginningEdit="dgList_BeginningEdit">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Название"
                                     Width="40*"

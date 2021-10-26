@@ -8,6 +8,7 @@ namespace Neurosoft
 {
     public partial class MainWindow : Window
     {
+        private string oldTitleRow;
         public MainWindow()
         {
             InitializeComponent();
@@ -22,20 +23,24 @@ namespace Neurosoft
                 var datagrid = (sender as DataGrid).ItemsSource as ObservableCollection<AdditionalParametersViewModel>;
                 for (int i = 0; i < datagrid.Count; i++)
                 {
-                    if (row == datagrid[i].Title && index != i)
+                    if (row.ToLower() == datagrid[i].Title.ToLower() && index != i)
                     {
                         MessageBox.Show("Это имя уже существет");
-                        datagrid[index].Title = "ааа";
+                        datagrid[index].Title = oldTitleRow;
                         return;
                     }
                     if (row == "")
                     {
                         MessageBox.Show("Поле не может быть пустым!");
-                        datagrid[index].Title = "Параметр";
+                        datagrid[index].Title = oldTitleRow;
                         return;
                     }
                 }
             }
+        }
+        private void dgList_BeginningEdit(object sender, DataGridBeginningEditEventArgs e)
+        {
+            oldTitleRow = (e.Row.Item as AdditionalParametersViewModel).Title;
         }
         public static void ItemNotSelectedWarning()
         {
