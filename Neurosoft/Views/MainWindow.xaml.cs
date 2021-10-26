@@ -13,7 +13,6 @@ namespace Neurosoft
             InitializeComponent();
             DataContext = new MainWindowViewModel(new JsonFileService());
         }
-
         private void dgList_RowEditEnding(object sender, DataGridRowEditEndingEventArgs e)
         {
             if (dgList != null)
@@ -26,11 +25,21 @@ namespace Neurosoft
                     if (row == datagrid[i].Title && index != i)
                     {
                         MessageBox.Show("Это имя уже существет");
-                        datagrid[index].Title = "";
+                        datagrid[index].Title = "ааа";
+                        return;
+                    }
+                    if (row == "")
+                    {
+                        MessageBox.Show("Поле не может быть пустым!");
+                        datagrid[index].Title = "Параметр";
                         return;
                     }
                 }
             }
+        }
+        public static void ItemNotSelectedWarning()
+        {
+            MessageBox.Show("Выберите элемент");
         }
     }
 }

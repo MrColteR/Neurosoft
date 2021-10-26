@@ -23,12 +23,12 @@
             <Button x:Name="btnUp"
                     Command="{Binding MoveUpCommand}"
                     CommandParameter="{Binding SelectedDataList}">
-                <Image Source="/Image/btnUp.png" MaxHeight="32"/>
+                <Image Source="/Image/btnUpBlue.png" MaxHeight="32"/>
             </Button>
             <Button x:Name="btnDown"
                     Command="{Binding MoveDownCommand}"
                     CommandParameter="{Binding SelectedDataList}">
-                <Image Source="/Image/btnDown.png" MaxHeight="32"/>
+                <Image Source="/Image/btnDownBlue.png" MaxHeight="32"/>
             </Button>
             <Separator></Separator>
             <Button x:Name="btnDelete" 
@@ -48,7 +48,8 @@
                   Background="White"
                   GridLinesVisibility="None"
                   RowBackground="LightGray"
-                  AlternatingRowBackground="White" RowEditEnding="dgList_RowEditEnding">
+                  AlternatingRowBackground="White" RowEditEnding="dgList_RowEditEnding"
+                  SelectionMode="Single">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Название"
                                     Width="40*"

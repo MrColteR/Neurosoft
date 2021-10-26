@@ -34,7 +34,8 @@
                   GridLinesVisibility="None"
                   ItemsSource="{Binding DataList}"
                   SelectedItem="{Binding SelectedDataList}"
-                  SelectedIndex="{Binding SelectedIndex}" RowEditEnding="dgList_RowEditEnding">
+                  SelectedIndex="{Binding SelectedIndex}" RowEditEnding="dgList_RowEditEnding"
+                  SelectionMode="Single">
             <DataGrid.Columns>
                 <DataGridTextColumn Width="*" 
                                     Binding="{Binding Path = ListValue, UpdateSourceTrigger=PropertyChanged}"/>

@@ -44,10 +44,12 @@ namespace Neurosoft.ViewModels
             {
                 return removeCommand ?? (removeCommand = new RelayCommand(obj =>
                 {
-                    AdditionalParametersViewModel additionalParametrs = obj as AdditionalParametersViewModel;
-                    if (additionalParametrs != null)
+                    var item = obj as AdditionalParametersViewModel;
+                    var index = DataList.IndexOf(item);
+                    if (item != null)
                     {
-                        DataList.Remove(additionalParametrs);
+                        DataList.Remove(item);
+                        SelectedIndex = index - 1;
                     }
                 },(obj) => DataList.Count > 0));
             }
@@ -59,13 +61,20 @@ namespace Neurosoft.ViewModels
                 return moveUpCommand ?? (moveUpCommand = new RelayCommand(obj =>
                 {
                     var item = obj as AdditionalParametersViewModel;
-                    var index = DataList.IndexOf(item);
-                    if (index != 0)
+                    if (item != null)
                     {
-                        var temp = DataList[index - 1];
-                        DataList[index - 1] = DataList[index];
-                        DataList[index] = temp;
-                        SelectedIndex = index - 1;
+                        var index = DataList.IndexOf(item);
+                        if (index != 0)
+                        {
+                            var temp = DataList[index - 1];
+                            DataList[index - 1] = DataList[index];
+                            DataList[index] = temp;
+                            SelectedIndex = index - 1;
+                        }
+                    }
+                    else
+                    {
+                        MainWindow.ItemNotSelectedWarning();
                     }
                 }));
             }
@@ -77,13 +86,20 @@ namespace Neurosoft.ViewModels
                 return moveDownCommand ?? (moveDownCommand = new RelayCommand(obj =>
                 {
                     var item = obj as AdditionalParametersViewModel;
-                    var index = DataList.IndexOf(item);
-                    if (index != DataList.Count - 1)
+                    if (item != null)
                     {
-                        var temp = DataList[index + 1];
-                        DataList[index + 1] = DataList[index];
-                        DataList[index] = temp;
-                        SelectedIndex = index + 1;
+                        var index = DataList.IndexOf(item);
+                        if (index != DataList.Count - 1)
+                        {
+                            var temp = DataList[index + 1];
+                            DataList[index + 1] = DataList[index];
+                            DataList[index] = temp;
+                            SelectedIndex = index + 1;
+                        }
+                    }
+                    else
+                    {
+                        MainWindow.ItemNotSelectedWarning();
                     }
                 }));
             }

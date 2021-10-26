@@ -36,8 +36,6 @@ namespace Neurosoft.Views
             if (dgList != null)
             {
                 var row = (e.Row.Item as ListValuesViewModel).ListValue;
-                //var index = (e.Row.Item as ListValuesViewModel).;
-                //var index = (e.Row. as ListWindowViewModel);
                 var index = (sender as DataGrid).SelectedIndex;
                 var datagrid = (sender as DataGrid).ItemsSource as ObservableCollection<ListValuesViewModel>;
                 for (int i = 0; i < datagrid.Count; i++)
@@ -46,6 +44,12 @@ namespace Neurosoft.Views
                     {
                         MessageBox.Show("Это имя уже существет");
                         datagrid[index].ListValue = "";
+                        return;
+                    }
+                    if (row == "")
+                    {
+                        MessageBox.Show("Поле не может быть пустым!");
+                        datagrid[index].ListValue = "Параметр";
                         return;
                     }
                 }

@@ -132,8 +132,12 @@
   <ItemGroup>
     <Resource Include="Image\btnAdd.png" />
     <Resource Include="Image\btnDelete.png" />
-    <Resource Include="Image\btnDown.png" />
-    <Resource Include="Image\btnUp.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\btnDownBlue.png" />
+    <Resource Include="Image\btnDownGrey.png" />
+    <Resource Include="Image\btnUpBlue.png" />
+    <Resource Include="Image\btnUpGrey.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
