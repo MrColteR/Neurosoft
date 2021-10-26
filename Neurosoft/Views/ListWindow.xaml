@@ -34,10 +34,9 @@
                   GridLinesVisibility="None"
                   ItemsSource="{Binding DataList}"
                   SelectedItem="{Binding SelectedDataList}"
-                  SelectedIndex="{Binding SelectedIndex}">
+                  SelectedIndex="{Binding SelectedIndex}" RowEditEnding="dgList_RowEditEnding">
             <DataGrid.Columns>
-                <DataGridTextColumn Width="*"
-                                    IsReadOnly="True" 
+                <DataGridTextColumn Width="*" 
                                     Binding="{Binding Path = ItemList}"/>
             </DataGrid.Columns>
         </DataGrid>
@@ -79,6 +78,7 @@
                 Height="23"/>
         <Button x:Name="btnAdd"
                 Command="{Binding AddCommand}"
+                CommandParameter="{Binding DataList}"
                 Content="Добавить..." 
                 HorizontalAlignment="Left" 
                 VerticalAlignment="Top"

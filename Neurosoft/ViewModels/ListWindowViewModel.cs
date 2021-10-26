@@ -12,7 +12,7 @@ namespace Neurosoft.ViewModels
     public class ListWindowViewModel : ViewModel
     {
         private int openedItemId;
-        private int index;
+        //private int index;
         private AdditionalParametersViewModel view;
         #region Команды
         private RelayCommand addCommand;
@@ -28,6 +28,7 @@ namespace Neurosoft.ViewModels
             {
                 return addCommand ?? (addCommand = new RelayCommand(obj =>
                 {
+                    var index = DataList.Count;
                     ListParams listParamsItem = new ListParams($"Параметр {index}");
                     DataList.Add(listParamsItem);
                     SelectedDataList = listParamsItem;

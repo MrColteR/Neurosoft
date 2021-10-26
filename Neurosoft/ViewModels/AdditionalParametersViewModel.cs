@@ -1,6 +1,4 @@
 ﻿using Neurosoft.Command;
-using Neurosoft.Data.Base;
-//using Neurosoft.Models;
 using Neurosoft.ViewModels.Base;
 using Neurosoft.Views;
 using System.Collections.Generic;
@@ -8,7 +6,6 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
-//using System.ComponentModel.DataAnnotations;
 
 namespace Neurosoft.ViewModels
 {
@@ -30,37 +27,11 @@ namespace Neurosoft.ViewModels
         }
         public string Title
         {
-            //get
-            //{
-            //    return title;
-            //}
-            //set
-            //{
-            //    if (title == value) return;
-            //    title = value;
-            //    OnPropertyChanged(nameof(Title));
-            //}
-            get { return title; }
+            get { return title; } // перенести message box в view или в отдельный метод
             set
             {
-                if (DataList == null)
-                {
-                    title = value;
-                    OnPropertyChanged(nameof(Title));
-                }
-                else
-                {
-                    foreach (var item in DataList)
-                    {
-                        if (value == item.title)
-                        {
-                            //MessageBox.Show("Имя занято");
-                            return;
-                        }
-                    }
-                    title = value;
-                    OnPropertyChanged(nameof(Title));
-                }
+                title = value;
+                OnPropertyChanged(nameof(Title));
             }
         }
         public string AdditionalList
@@ -115,22 +86,7 @@ namespace Neurosoft.ViewModels
             }
         }
         #endregion
-        //private void Examination()
-        //{
-        //    foreach (var item in DataList)
-        //    {
-        //        if (title == item.title)
-        //        {
-        //            MessageBox.Show("пп");
-        //        }
-        //        else
-        //        {
-        //            title = value;
-        //            OnPropertyChanged(nameof(Title));
-        //        }
-        //    }
-        //}
-        static public ObservableCollection<AdditionalParametersViewModel> DataList { get; set; }
+        /*static*/ public ObservableCollection<AdditionalParametersViewModel> DataList { get; set; }
         public AdditionalParametersViewModel() { }
         public AdditionalParametersViewModel(ObservableCollection<AdditionalParametersViewModel> data)
         {

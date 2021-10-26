@@ -30,5 +30,24 @@ namespace Neurosoft.Views
         {
             DialogResult = false;
         }
+        private void dgList_RowEditEnding(object sender, DataGridRowEditEndingEventArgs e)
+        {
+            if (dgList != null)
+            {
+                var viewModel = DataContext as ListWindowViewModel;
+                var row = viewModel.SelectedDataList;
+                var dataGrid = viewModel.DataList;
+                var index = viewModel.SelectedIndex;
+                for (int i = 0; i < dataGrid.Count; i++)
+                {
+                    if (row.ItemList == dataGrid[i].ItemList && index != i)
+                    {
+                        MessageBox.Show("Это имя уже существет");
+                        dataGrid[i].ItemList = "";
+                        return;
+                    }
+                }
+            }
+        }
     }
 }
