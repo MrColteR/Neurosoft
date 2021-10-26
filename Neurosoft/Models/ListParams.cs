@@ -9,12 +9,6 @@ namespace Neurosoft.Models
 {
     public class ListParams : Model
     {
-        //private int id;
-        //public int Id
-        //{
-        //    get { return id; }
-        //    set { id = value; }
-        //}
         private string listValue;
         public string ListValue
         {

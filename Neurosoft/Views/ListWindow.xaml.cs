@@ -33,23 +33,23 @@ namespace Neurosoft.Views
         }
         private void dgList_RowEditEnding(object sender, DataGridRowEditEndingEventArgs e)
         {
-            //if (dgList != null)
-            //{
-            //    var row = (e.Row.Item as ListValuesViewModel).ListValue;
+            if (dgList != null)
+            {
+                var row = (e.Row.Item as ListValuesViewModel).ListValue;
                 //var index = (e.Row.Item as ListValuesViewModel).;
-                //var index = (e.Row.Item as ListValuesViewModel).Id;
-                //var a = e.Row.Item;
-                //var datagrid = (sender as DataGrid).ItemsSource as ObservableCollection<ListValuesViewModel>;
-                //for (int i = 0; i < datagrid.Count; i++)
-                //{
-                    //if (row == datagrid[i].ListValue && index != i)
-                    //{
-                    //    MessageBox.Show("Это имя уже существет");
-                    //    datagrid[index].ListValue = "";
-                    //    return;
-                    //}
-            //    }
-            //}
+                //var index = (e.Row. as ListWindowViewModel);
+                var index = (sender as DataGrid).SelectedIndex;
+                var datagrid = (sender as DataGrid).ItemsSource as ObservableCollection<ListValuesViewModel>;
+                for (int i = 0; i < datagrid.Count; i++)
+                {
+                    if (row == datagrid[i].ListValue && index != i)
+                    {
+                        MessageBox.Show("Это имя уже существет");
+                        datagrid[index].ListValue = "";
+                        return;
+                    }
+                }
+            }
         }
     }
 }
