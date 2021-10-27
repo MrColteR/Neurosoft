@@ -11,6 +11,8 @@ namespace Neurosoft.ViewModels
     public class ListValuesViewModel : ViewModel
     {
         private string listValue;
+        private string oldlistValue;
+        private int oldID;
         public string ListValue
         {
             get { return listValue; }
@@ -19,6 +21,28 @@ namespace Neurosoft.ViewModels
                 listValue = value;
                 OnPropertyChanged(nameof(ListValue));
             }
+        }
+        public void BeginningEdit(int index)
+        {
+            oldlistValue = ListValue;
+            oldID = index;
+        }
+        public string RowEditEnding(ObservableCollection<ListValuesViewModel> datagrid, int index)
+        {
+            for (int i = 0; i < datagrid.Count; i++)
+            {
+                if (listValue.ToLower() == datagrid[i].ListValue.ToLower() && oldID != i)
+                {
+                    datagrid[oldID].ListValue = oldlistValue;
+                    return "repetition";
+                }
+                if (listValue == "")
+                {
+                    datagrid[oldID].ListValue = oldlistValue;
+                    return "empty";
+                }
+            }
+            return null;
         }
         public ObservableCollection<ListValuesViewModel> DataList { get; set; }
         public ListValuesViewModel() { }

@@ -16,8 +16,6 @@ namespace Neurosoft.ViewModels
         private static string path = Directory.GetCurrentDirectory();
         public readonly string fileName = path.Substring(0, path.IndexOf("bin")) + "List.json";
         IFileService fileService;
-        //private string oldTitle;
-        //public string OldTitle { get; set; }
         #region Команды
         private RelayCommand addCommand;
         private RelayCommand removeCommand;
@@ -176,10 +174,6 @@ namespace Neurosoft.ViewModels
                 OnPropertyChanged(nameof(ParametrTypes));
             }
         }
-        //public void BeginningEdit(string oldTitle)
-        //{
-        //    this.oldTitle = oldTitle;
-        //}
         public ObservableCollection<AdditionalParametersViewModel> DataList { get; set; }
         public MainWindowViewModel(IFileService fileService)
         {

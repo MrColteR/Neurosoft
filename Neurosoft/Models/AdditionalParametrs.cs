@@ -10,6 +10,15 @@ namespace Neurosoft.Models
         private string type;
         private string additionalList;
         private List<string> additionalListArr;
+        private string oldTitle;
+       public string OldTitle
+        {
+            get { return oldTitle; }
+            set
+            {
+                oldTitle = value;
+            }
+        }
         public int Id
         {
             get { return id; }

@@ -8,7 +8,6 @@ namespace Neurosoft
 {
     public partial class MainWindow : Window
     {
-        private string oldTitleRow; 
         public MainWindow()
         {
             InitializeComponent();
@@ -17,31 +16,20 @@ namespace Neurosoft
         }
         private void dgList_BeginningEdit(object sender, DataGridBeginningEditEventArgs e)
         {
-            oldTitleRow = (e.Row.Item as AdditionalParametersViewModel).Title;
-            //var a = (e.Row.Item as AdditionalParametersViewModel).
+            var index = (sender as DataGrid).SelectedIndex;
+            (e.Row.Item as AdditionalParametersViewModel).BeginningEdit(index);
         }
         private void dgList_RowEditEnding(object sender, DataGridRowEditEndingEventArgs e)
         {
-            if (dgList != null)
+            var datagrid = (sender as DataGrid).ItemsSource as ObservableCollection<AdditionalParametersViewModel>;
+            var str = (e.Row.Item as AdditionalParametersViewModel).RowEditEnding(datagrid);
+            if (str == "repetition")
             {
-                var row = (e.Row.Item as AdditionalParametersViewModel).Title;
-                var index = (e.Row.Item as AdditionalParametersViewModel).Id;
-                var datagrid = (sender as DataGrid).ItemsSource as ObservableCollection<AdditionalParametersViewModel>;
-                for (int i = 0; i < datagrid.Count; i++)
-                {
-                    if (row.ToLower() == datagrid[i].Title.ToLower() && index != i)
-                    {
-                        MessageBox.Show("Это имя уже существет");
-                        datagrid[index].Title = oldTitleRow;
-                        return;
-                    }
-                    if (row == "")
-                    {
-                        MessageBox.Show("Поле не может быть пустым!");
-                        datagrid[index].Title = oldTitleRow;
-                        return;
-                    }
-                }
+                MessageBox.Show("Это имя уже существет");
+            }
+            else if (str == "empty")
+            {
+                MessageBox.Show("Поле не может быть пустым!");
             }
         }
     }

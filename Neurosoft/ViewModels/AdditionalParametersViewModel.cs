@@ -16,6 +16,18 @@ namespace Neurosoft.ViewModels
         private string additionalList;
         private List<string> additionalListArr;
         private ParametrType parametrType;
+
+        private string oldTitle;
+        private int oldID;
+        public string OldTitle
+        {
+            get { return oldTitle; }
+            set 
+            { 
+                oldTitle = value;
+                OnPropertyChanged(nameof(OldTitle));
+            }
+        }
         public int Id
         {
             get { return id; }
@@ -84,6 +96,28 @@ namespace Neurosoft.ViewModels
                     }
                 }));
             }
+        }
+        public void BeginningEdit(int index)
+        {
+            oldTitle = Title;
+            oldID = index;
+        }
+        public string RowEditEnding(ObservableCollection<AdditionalParametersViewModel> datagrid)
+        {
+            for (int i = 0; i < datagrid.Count; i++)
+            {
+                if (title.ToLower() == datagrid[i].Title.ToLower() && oldID != i)
+                {
+                    datagrid[oldID].Title = oldTitle;
+                    return "repetition";
+                }
+                if (title == "")
+                {
+                    datagrid[oldID].Title = oldTitle;
+                    return "empty";
+                }
+            }
+            return null;
         }
         #endregion
         public ObservableCollection<AdditionalParametersViewModel> DataList { get; set; }

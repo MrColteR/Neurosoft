@@ -31,28 +31,24 @@ namespace Neurosoft.Views
         {
             DialogResult = false;
         }
+        private void dgList_BeginningEdit(object sender, DataGridBeginningEditEventArgs e)
+        {
+            var index = (sender as DataGrid).SelectedIndex;
+            (e.Row.Item as ListValuesViewModel).BeginningEdit(index);
+        }
         private void dgList_RowEditEnding(object sender, DataGridRowEditEndingEventArgs e)
         {
-            if (dgList != null)
+            var index = (sender as DataGrid).SelectedIndex;
+
+            var datagrid = (sender as DataGrid).ItemsSource as ObservableCollection<ListValuesViewModel>;
+            var str = (e.Row.Item as ListValuesViewModel).RowEditEnding(datagrid, index);
+            if (str == "repetition")
             {
-                var row = (e.Row.Item as ListValuesViewModel).ListValue;
-                var index = (sender as DataGrid).SelectedIndex;
-                var datagrid = (sender as DataGrid).ItemsSource as ObservableCollection<ListValuesViewModel>;
-                for (int i = 0; i < datagrid.Count; i++)
-                {
-                    if (row == datagrid[i].ListValue && index != i)
-                    {
-                        MessageBox.Show("Это имя уже существет");
-                        datagrid[index].ListValue = "";
-                        return;
-                    }
-                    if (row == "")
-                    {
-                        MessageBox.Show("Поле не может быть пустым!");
-                        datagrid[index].ListValue = "Параметр";
-                        return;
-                    }
-                }
+                MessageBox.Show("Это имя уже существет");
+            }
+            else if (str == "empty")
+            {
+                MessageBox.Show("Поле не может быть пустым!");
             }
         }
     }
