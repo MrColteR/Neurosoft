@@ -63,7 +63,7 @@ namespace Neurosoft.ViewModels
                         DataList[index] = temp;
                         SelectedIndex = index - 1;
                     }
-                }));
+                },(obj) => SelectedIndex != -1));
             }
         }
         public RelayCommand MoveDownCommand
@@ -81,7 +81,7 @@ namespace Neurosoft.ViewModels
                         DataList[index] = temp;
                         SelectedIndex = index + 1;
                     }
-                }));
+                },(obj) => SelectedIndex != -1));
             }
         }
         public RelayCommand OkCommand

@@ -8,11 +8,17 @@ namespace Neurosoft
 {
     public partial class MainWindow : Window
     {
-        private string oldTitleRow;
+        private string oldTitleRow; 
         public MainWindow()
         {
             InitializeComponent();
             DataContext = new MainWindowViewModel(new JsonFileService());
+            //SystemColors.HighlightBrush.
+        }
+        private void dgList_BeginningEdit(object sender, DataGridBeginningEditEventArgs e)
+        {
+            oldTitleRow = (e.Row.Item as AdditionalParametersViewModel).Title;
+            //var a = (e.Row.Item as AdditionalParametersViewModel).
         }
         private void dgList_RowEditEnding(object sender, DataGridRowEditEndingEventArgs e)
         {
@@ -37,14 +43,6 @@ namespace Neurosoft
                     }
                 }
             }
-        }
-        private void dgList_BeginningEdit(object sender, DataGridBeginningEditEventArgs e)
-        {
-            oldTitleRow = (e.Row.Item as AdditionalParametersViewModel).Title;
-        }
-        public static void ItemNotSelectedWarning()
-        {
-            MessageBox.Show("Выберите элемент");
         }
     }
 }

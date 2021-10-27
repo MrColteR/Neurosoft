@@ -11,11 +11,15 @@
     <Grid>
         <Grid.Resources>
             <local:ConvertToString x:Key="ConvertToString"/>
+            <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}"
+                                 Color="LightBlue"/>
+            <SolidColorBrush x:Key="{x:Static SystemColors.InactiveSelectionHighlightBrushKey}" 
+                                 Color="LightBlue"/>
         </Grid.Resources>
         <ToolBar VerticalAlignment="Top"
                  Height="40"
                  Background="White"
-                 ToolBarTray.IsLocked="True">
+                 ToolBarTray.IsLocked="True" Focusable="False">
             <Button x:Name="btnAdd"
                     Command="{Binding AddCommand}">
                 <Image Source="/Image/btnAdd.png" MaxHeight="32"/>
@@ -33,8 +37,9 @@
             <Separator></Separator>
             <Button x:Name="btnDelete" 
                     Command="{Binding RemoveCommand}"
-                    CommandParameter="{Binding SelectedDataList}">
-                <Image Source="/Image/btnDelete.png" MaxHeight="32"/>
+                    CommandParameter="{Binding SelectedDataList}"
+                    Focusable="False">
+                <Image Source="/Image/btnDelete.png" MaxHeight="32" Focusable="False"/>
             </Button>
         </ToolBar>
 
@@ -50,6 +55,11 @@
                   RowBackground="LightGray"
                   AlternatingRowBackground="White" RowEditEnding="dgList_RowEditEnding"
                   SelectionMode="Single" BeginningEdit="dgList_BeginningEdit">
+            <DataGrid.CellStyle>
+                <Style TargetType="DataGridCell">
+                    <Setter Property="BorderThickness" Value="0"/>
+                </Style>
+            </DataGrid.CellStyle>
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Название"
                                     Width="40*"

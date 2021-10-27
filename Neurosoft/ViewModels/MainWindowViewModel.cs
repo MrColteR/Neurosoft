@@ -16,6 +16,8 @@ namespace Neurosoft.ViewModels
         private static string path = Directory.GetCurrentDirectory();
         public readonly string fileName = path.Substring(0, path.IndexOf("bin")) + "List.json";
         IFileService fileService;
+        //private string oldTitle;
+        //public string OldTitle { get; set; }
         #region Команды
         private RelayCommand addCommand;
         private RelayCommand removeCommand;
@@ -61,8 +63,8 @@ namespace Neurosoft.ViewModels
                 return moveUpCommand ?? (moveUpCommand = new RelayCommand(obj =>
                 {
                     var item = obj as AdditionalParametersViewModel;
-                    if (item != null)
-                    {
+                    //if (item != null)
+                    //{
                         var index = DataList.IndexOf(item);
                         if (index != 0)
                         {
@@ -71,12 +73,12 @@ namespace Neurosoft.ViewModels
                             DataList[index] = temp;
                             SelectedIndex = index - 1;
                         }
-                    }
-                    else
-                    {
-                        MainWindow.ItemNotSelectedWarning();
-                    }
-                }));
+                    //}
+                    //else
+                    //{
+                    //    MainWindow.ItemNotSelectedWarning();
+                    //}
+                },(obj) => SelectedIndex != -1 ));
             }
         }
         public RelayCommand MoveDownCommand
@@ -86,8 +88,8 @@ namespace Neurosoft.ViewModels
                 return moveDownCommand ?? (moveDownCommand = new RelayCommand(obj =>
                 {
                     var item = obj as AdditionalParametersViewModel;
-                    if (item != null)
-                    {
+                    //if (item != null)
+                    //{
                         var index = DataList.IndexOf(item);
                         if (index != DataList.Count - 1)
                         {
@@ -96,12 +98,12 @@ namespace Neurosoft.ViewModels
                             DataList[index] = temp;
                             SelectedIndex = index + 1;
                         }
-                    }
-                    else
-                    {
-                        MainWindow.ItemNotSelectedWarning();
-                    }
-                }));
+                    //}
+                    //else
+                    //{
+                    //    MainWindow.ItemNotSelectedWarning();
+                    //}
+                },(obj) => SelectedIndex != -1));
             }
         }
         public RelayCommand SaveAndCloseCommand
@@ -174,6 +176,10 @@ namespace Neurosoft.ViewModels
                 OnPropertyChanged(nameof(ParametrTypes));
             }
         }
+        //public void BeginningEdit(string oldTitle)
+        //{
+        //    this.oldTitle = oldTitle;
+        //}
         public ObservableCollection<AdditionalParametersViewModel> DataList { get; set; }
         public MainWindowViewModel(IFileService fileService)
         {
