@@ -7,6 +7,14 @@
         mc:Ignorable="d"
         Title="Список" Height="450" Width="800">
     <Grid>
+        <Grid.Resources>
+            <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}"
+                                 Color="LightBlue"/>
+            <SolidColorBrush x:Key="{x:Static SystemColors.InactiveSelectionHighlightBrushKey}" 
+                                 Color="LightBlue"/>
+            <SolidColorBrush x:Key="{x:Static SystemColors.HighlightTextBrushKey}"
+                                 Color="Black"/>
+        </Grid.Resources>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="39*"/>
             <ColumnDefinition Width="5*"/>
@@ -36,6 +44,11 @@
                   SelectedItem="{Binding SelectedDataList}"
                   SelectedIndex="{Binding SelectedIndex}" RowEditEnding="dgList_RowEditEnding"
                   SelectionMode="Single" BeginningEdit="dgList_BeginningEdit">
+            <DataGrid.CellStyle>
+                <Style TargetType="DataGridCell">
+                    <Setter Property="BorderThickness" Value="0"/>
+                </Style>
+            </DataGrid.CellStyle>
             <DataGrid.Columns>
                 <DataGridTextColumn Width="*" 
                                     Binding="{Binding Path = ListValue, UpdateSourceTrigger=PropertyChanged}"/>

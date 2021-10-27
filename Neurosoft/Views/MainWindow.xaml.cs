@@ -13,6 +13,8 @@ namespace Neurosoft
             InitializeComponent();
             DataContext = new MainWindowViewModel(new JsonFileService());
             //SystemColors.HighlightBrush.
+            //SystemColors.HighlightTextBrush.Color = 
+            //SystemColors.SolidColorBrush.
         }
         private void dgList_BeginningEdit(object sender, DataGridBeginningEditEventArgs e)
         {

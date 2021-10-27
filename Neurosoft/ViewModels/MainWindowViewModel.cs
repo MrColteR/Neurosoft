@@ -49,7 +49,11 @@ namespace Neurosoft.ViewModels
                     if (item != null)
                     {
                         DataList.Remove(item);
-                        SelectedIndex = index - 1;
+                        if (index == DataList.Count)
+                        {
+                            SelectedIndex = index - 1;
+                        }
+                        SelectedIndex = index;
                     }
                 },(obj) => DataList.Count > 0));
             }
@@ -61,21 +65,14 @@ namespace Neurosoft.ViewModels
                 return moveUpCommand ?? (moveUpCommand = new RelayCommand(obj =>
                 {
                     var item = obj as AdditionalParametersViewModel;
-                    //if (item != null)
-                    //{
-                        var index = DataList.IndexOf(item);
-                        if (index != 0)
-                        {
-                            var temp = DataList[index - 1];
-                            DataList[index - 1] = DataList[index];
-                            DataList[index] = temp;
-                            SelectedIndex = index - 1;
-                        }
-                    //}
-                    //else
-                    //{
-                    //    MainWindow.ItemNotSelectedWarning();
-                    //}
+                    var index = DataList.IndexOf(item);
+                    if (index != 0)
+                    {
+                        var temp = DataList[index - 1];
+                        DataList[index - 1] = DataList[index];
+                        DataList[index] = temp;
+                        SelectedIndex = index - 1;
+                    }
                 },(obj) => SelectedIndex != -1 ));
             }
         }
@@ -86,21 +83,14 @@ namespace Neurosoft.ViewModels
                 return moveDownCommand ?? (moveDownCommand = new RelayCommand(obj =>
                 {
                     var item = obj as AdditionalParametersViewModel;
-                    //if (item != null)
-                    //{
-                        var index = DataList.IndexOf(item);
-                        if (index != DataList.Count - 1)
-                        {
-                            var temp = DataList[index + 1];
-                            DataList[index + 1] = DataList[index];
-                            DataList[index] = temp;
-                            SelectedIndex = index + 1;
-                        }
-                    //}
-                    //else
-                    //{
-                    //    MainWindow.ItemNotSelectedWarning();
-                    //}
+                    var index = DataList.IndexOf(item);
+                    if (index != DataList.Count - 1)
+                    {
+                        var temp = DataList[index + 1];
+                        DataList[index + 1] = DataList[index];
+                        DataList[index] = temp;
+                        SelectedIndex = index + 1;
+                    }
                 },(obj) => SelectedIndex != -1));
             }
         }

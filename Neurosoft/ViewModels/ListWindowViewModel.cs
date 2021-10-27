@@ -40,10 +40,16 @@ namespace Neurosoft.ViewModels
             {
                 return removeCommand ?? (removeCommand = new RelayCommand(obj =>
                 {
-                    ListValuesViewModel listParams = obj as ListValuesViewModel;
-                    if (listParams != null)
+                    ListValuesViewModel item = obj as ListValuesViewModel;
+                    var index = DataList.IndexOf(item);
+                    if (item != null)
                     {
-                        DataList.Remove(listParams);
+                        DataList.Remove(item);
+                        if (index == DataList.Count)
+                        {
+                            SelectedIndex = index - 1;
+                        }
+                        SelectedIndex = index;
                     }
                 }, (obj) => DataList.Count > 0));
             }
